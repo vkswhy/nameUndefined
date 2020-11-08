@@ -1,6 +1,4 @@
 from django.db import models
-
-
 class Contests(models.Model):
     contestName=models.CharField(max_length=50)
 class Questions(models.Model):
