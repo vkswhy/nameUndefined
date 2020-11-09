@@ -17,12 +17,19 @@
             aria-expanded="false" aria-label="Toggle navigation" ></button>
         <div class="collapse navbar-collapse" id="collapsibleNavId">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                <li class="nav-item active">
-                    <a class="nav-link" href="register">Register <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Login</a>
-                </li>
+                {% if a %}
+                    <li class="nav-link active">hello, {{username}}</li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout"><button class="btn-secondary">Log out</button></a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/register">Register <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login">Login</a>
+                    </li>
+                {% endif %}
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
                     <div class="dropdown-menu" aria-labelledby="dropdownId">
@@ -33,7 +40,7 @@
             </ul>
         </div>
     </nav>
-
+    <div class="alert alert-warning alert-dismissible fade show">{{info}}</div>
     {%block bodyContent%}
     {%endblock%}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
