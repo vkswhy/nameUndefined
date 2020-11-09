@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
 {% block bodyContent %}
+
 <div class="container bg-light">
-<h1>Register</h1>
-<form action="" method="POST" class="form-group">
+<h1>Login</h1>
+<form class="form-group" action="" method="POST">
     {% csrf_token %}
     {{form.as_p}}
-    <input type="submit" class="btn-success" value="submit"></input>
+    <input type="submit" class="btn-success">   
 </form>
-</div>
-
 {% endblock bodyContent %}
+</div>
