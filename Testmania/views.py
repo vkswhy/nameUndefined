@@ -1,11 +1,16 @@
 from django.shortcuts import render,HttpResponse,redirect
 from django.contrib.auth import login,logout,authenticate
-from .forms import registerForm,loginForm
+from django.contrib.auth.decorators import login_required
+from .forms import registerForm,loginForm,createTestModelForm
+
+
+
 def homePage(request):
     auth=False
     if request.user.is_authenticated:
         auth=True
-    return render(request,'base.html',{'a':auth,'username':request.user.username,'info':"in the home page"})
+    return render(request,'index.html',{'a':auth,'username':request.user.username,'info':"in the home page"})
+
 def registerView(request):
     
     if request.method=="POST":
@@ -46,5 +51,15 @@ def loginView(request):
 def logoutView(request):
     logout(request)
     return redirect('/')
-
+@login_required
+def createTestView(request):
+    if request.method=="POST":
+        form=createTestModelForm(request.POST)
+        if form.is_valid():
+            return redirect("/")
+        else:
+            return redirect("/")
+    else:
+        form=createTestModelForm()
+        return render(request,"createTest.html",{'form':form})
 
