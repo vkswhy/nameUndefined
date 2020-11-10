@@ -1,15 +1,15 @@
 from django.db import models
 from django.contrib.auth.models import User
-
+from django.contrib import admin
 
 class Contests(models.Model):
     contest=models.CharField(blank=True,max_length=50,default=None)
-    Author=models.OneToOneField(User,on_delete=models.CASCADE,blank=True,default=None)
+    Author=models.ForeignKey(User, on_delete=models.CASCADE,blank=True)
     noOfQues=models.IntegerField(blank=True,default=None)
-    startDate=models.DateField(blank=True,default=None)
-    startTime=models.TimeField(blank=True,default=None)
-    endDate=models.DateField(blank=True,default=None)
-    endTime=models.TimeField(blank=True,default=None)
+    startDate=models.DateField()
+    startTime=models.TimeField()
+    endDate=models.DateField()
+    endTime=models.TimeField()
     timePerQues=models.CharField(blank=True,max_length=12,default=None)
 
 
@@ -27,4 +27,5 @@ class Questions(models.Model):
     responseC=models.ManyToManyField(User,related_name="response_c") 
     responseD=models.ManyToManyField(User,related_name="response_d") 
 
-admin.site.register()
+admin.site.register(Contests)
+admin.site.register(Questions)
