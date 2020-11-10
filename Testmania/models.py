@@ -1,8 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-
-
-
 class Contests(models.Model):
     contest=models.CharField(blank=True,max_length=50,default=None)
     Author=models.OneToOneField(User,on_delete=models.CASCADE,blank=True,default=None)

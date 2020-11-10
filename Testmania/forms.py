@@ -1,7 +1,6 @@
 from django import forms
 from .models import Contests
 from django.contrib.auth.models import User
-
 class registerForm(forms.ModelForm):
     class Meta:
         model=User
@@ -9,5 +8,6 @@ class registerForm(forms.ModelForm):
 class loginForm(forms.Form):
     username=forms.CharField(max_length=15,required=True)
     password=forms.CharField(max_length=15,required=True)
-        model=Contests
-        fields=['contest','noOfQues','startDate','startTime','endDate','endTime','timePerQues']
+    model=Contests
+    fields=['contest','noOfQues','startDate','startTime','endDate','endTime','timePerQues']
+    
