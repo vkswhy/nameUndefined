@@ -1,7 +1,6 @@
 from django import forms
 from .models import Contests
 from django.contrib.auth.models import User
-
 class registerForm(forms.ModelForm):
     class Meta:
         model=User

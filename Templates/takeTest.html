@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block bodyContent %}
+
+<form class="form-group" action="" method="POST">
+    {% csrf_token %}
+    <input type="text" name="id">
+    <input type="submit" class="btn-success">   
+</form>
+{% endblock bodyContent %}
