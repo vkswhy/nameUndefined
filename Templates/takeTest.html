@@ -1,11 +1,9 @@
 {% extends 'base.html' %}
 {% block bodyContent %}
 
-<h1>Login</h1>
 <form class="form-group" action="" method="POST">
     {% csrf_token %}
-    {{form.as_p}}
+    <input type="text" name="id">
     <input type="submit" class="btn-success">   
 </form>
-
 {% endblock bodyContent %}

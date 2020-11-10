@@ -2,7 +2,8 @@ from django.shortcuts import render,HttpResponse,redirect
 from django.contrib.auth import login,logout,authenticate
 from django.contrib.auth.decorators import login_required
 from .forms import registerForm,loginForm,createTestModelForm
-
+# from django.db import models
+from .models import Contests,Questions
 
 
 def homePage(request):
@@ -63,4 +64,16 @@ def createTestView(request):
         form=createTestModelForm()
         print(form)
         return render(request,"createTest.html",{'form':form})
+@login_required
+def takeTestView(request):
+    if request.method=='POST':
+        id=request.POST.get('id')
+        query_set=Contests.objects.filter(pk=id)
+        if query_set.count()>0:
+            return HttpResponse('SUCCess')
+        else:
+            return HttpResponse('ERRor')
+        return HttpResponse('success')
+    return render(request,'takeTest.html')
+    
 
