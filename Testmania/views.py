@@ -1,8 +1,7 @@
 from django.shortcuts import render,HttpResponse,redirect
 from django.contrib.auth import login,logout,authenticate
 from django.contrib.auth.decorators import login_required
-from .forms import registerForm,loginForm,createTestModelForm
-
+from .forms import registerForm,loginForm,createTestModelForm,createQuestionModelForm
 
 
 def homePage(request):
@@ -64,3 +63,6 @@ def createTestView(request):
         print(form)
         return render(request,"createTest.html",{'form':form})
 
+def createQuestionView(request):
+    if request.method=="POST":
+        form=createQuestionModelForm(request.POST)

@@ -6,7 +6,7 @@ class registerForm(forms.ModelForm):
     class Meta:
         model=User
         fields=['username','first_name','last_name','email','password']
-        
+
 class loginForm(forms.Form):
     username=forms.CharField(max_length=15,required=True)
     password=forms.CharField(max_length=15,required=True)
@@ -16,3 +16,8 @@ class createTestModelForm(forms.ModelForm):
     class Meta:
         model=Contests
         fields=['contest','noOfQues','startDate','startTime','endDate','endTime','timePerQues']
+
+class createQuestionModelForm(forms.ModelForm):
+    class Meta:
+        model=Question
+        fields=['question','optionA','optionB','optionC','optionD','answer']

@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-
+from .admin import admin
 
 
 class Contests(models.Model):
@@ -28,3 +28,4 @@ class Questions(models.Model):
     responseC=models.ManyToManyField(User,related_name="response_c") 
     responseD=models.ManyToManyField(User,related_name="response_d") 
 
+admin.site.register()

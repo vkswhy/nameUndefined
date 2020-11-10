@@ -4,7 +4,10 @@
 <h1>Login</h1><br>
 <form class="form-group" action="" method="POST">
     {% csrf_token %}
+    {% for i in n %}
+    {{i}}
     {{form.as_p}}
+    {% endfor %}
     <input type="submit" class="btn-success">   
 </form>
 
