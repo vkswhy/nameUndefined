@@ -1,9 +1,16 @@
 from django.shortcuts import render,HttpResponse,redirect
 from django.contrib.auth import login,logout,authenticate
 from django.contrib.auth.decorators import login_required
-from .forms import registerForm,loginForm,createTestModelForm
-# from django.db import models
+from .forms import registerForm,loginForm,createTestModelForm,createQuestionModelForm
 from .models import Contests,Questions
+
+def createQuestionUtil(n):
+    questions=[]
+    for i in range(n):
+        questions.append({'index':i,'form':createQuestionModelForm()})
+
+    return questions
+
 def homePage(request):
     auth=False
     if request.user.is_authenticated:
@@ -48,18 +55,29 @@ def loginView(request):
 def logoutView(request):
     logout(request)
     return redirect('/')
+
 @login_required
 def createTestView(request):
     if request.method=="POST":
         form=createTestModelForm(request.POST)
         if form.is_valid():
-            return redirect("/")
+            print(form.cleaned_data)
+            contest=form.save(commit=False)
+            contest.Author=request.user
+            print(request.user)
+            contest.save()
+            
+            form=createQuestionUtil(contest.noOfQues)
+            return render(request,"createQuestion.html",{'form':form,})
         else:
+            print(form.errors)
             return redirect("/")
     else:
         form=createTestModelForm()
         print(form)
         return render(request,"createTest.html",{'form':form})
+
+
 @login_required
 def takeTestView(request):
     if request.method=='POST':
@@ -72,9 +90,14 @@ def takeTestView(request):
         return HttpResponse('success')
     values=[0 for i in range(10)]
     return render(request,'takeTest.html',{'values':values})
-@login_required
-def profile(request):
-    if request.method=="POST":
-        form=
     
+    
+
+def createQuestionView(request):
+    if request.method=="POST":
+        form=createQuestionModelForm(request.POST)
+        print(form)
+        return redirect("/")
+    else:
+        redirect("/")
 

@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block bodyContent %}
 
-<h1>Login</h1>
+<h1>Login</h1><br>
 <form class="form-group" action="" method="POST">
     {% csrf_token %}
     {{form.as_p}}

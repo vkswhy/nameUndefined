@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block bodyContent %}
+<form class="form-group" action="/createQuestions/" method="POST">
+    {% csrf_token %}
+    {% for i in form %}
+    <div class="container bg-info">
+    {{i.index}}
+    {{i.form.as_p}}
+    </div>
+    {% endfor %}
+    <input type="submit" class="btn-success">   
+</form>
+
+{% endblock bodyContent %}
