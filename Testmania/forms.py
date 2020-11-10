@@ -15,3 +15,7 @@ class createTestModelForm(forms.ModelForm):
     class Meta:
         model=Contests
         fields=['contest','noOfQues','startDate','startTime','endDate','endTime','timePerQues']
+class editProfie(forms.ModelForm):
+    class Meta:
+        model=editProfie
+        fields=['contest','noOfQues','startDate','startTime','endDate','endTime','timePerQues']

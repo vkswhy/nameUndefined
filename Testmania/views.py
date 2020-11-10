@@ -4,16 +4,12 @@ from django.contrib.auth.decorators import login_required
 from .forms import registerForm,loginForm,createTestModelForm
 # from django.db import models
 from .models import Contests,Questions
-
-
 def homePage(request):
     auth=False
     if request.user.is_authenticated:
         auth=True
     return render(request,'index.html',{'a':auth,'username':request.user.username,'info':"in the home page"})
-
 def registerView(request):
-    
     if request.method=="POST":
         form=registerForm(request.POST)
         if form.is_valid():
@@ -74,6 +70,11 @@ def takeTestView(request):
         else:
             return HttpResponse('ERRor')
         return HttpResponse('success')
-    return render(request,'takeTest.html')
+    values=[0 for i in range(10)]
+    return render(request,'takeTest.html',{'values':values})
+@login_required
+def profile(request):
+    if request.method=="POST":
+        form=
     
 

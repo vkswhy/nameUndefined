@@ -9,9 +9,7 @@ class Contests(models.Model):
     endDate=models.DateField(blank=True,default=None)
     endTime=models.TimeField(blank=True,default=None)
     timePerQues=models.CharField(blank=True,max_length=12,default=None)
-
-
-
+    
 class Questions(models.Model):
     question=models.CharField(blank=True,max_length=200,default=None)
     optionA=models.CharField(blank=True,max_length=50,default=None)
