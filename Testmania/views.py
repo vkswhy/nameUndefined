@@ -61,5 +61,6 @@ def createTestView(request):
             return redirect("/")
     else:
         form=createTestModelForm()
+        print(form)
         return render(request,"createTest.html",{'form':form})
 
