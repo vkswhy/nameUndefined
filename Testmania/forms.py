@@ -29,10 +29,14 @@ class createTestModelForm(forms.ModelForm):
             'startDate':inputDate(),
             'endDate':inputDate(),
             'startTime':inputTime(),
-            'endTime':inputTime(),   
+            'endTime':inputTime(),
+
         }
 
 class createQuestionModelForm(forms.ModelForm):
     class Meta:
         model=Questions
         fields=['question','optionA','optionB','optionC','optionD','answer']
+        widgets={
+            'question':forms.Textarea(attrs={"rows":"3"})
+        }

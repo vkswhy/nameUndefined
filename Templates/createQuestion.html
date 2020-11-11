@@ -2,12 +2,14 @@
 {% block bodyContent %}
 <form class="form-group" action="/createQuestions/" method="POST">
     {% csrf_token %}
-    {% for i in form %}
-    <div class="container bg-info">
-    {{i.index}}
-    {{i.form.as_p}}
+    
+    <div class="container bg-light">
+    <input type="text" name="contestId" value={{contestId}} hidden>
+    <input type="text" name="qNo" value={{qNo}} hidden>
+
+    <p>Question: {{qNo}}/{{noOfQues}}</p>
+    {{form.as_p}}
     </div>
-    {% endfor %}
     <input type="submit" class="btn-success">   
 </form>
 
