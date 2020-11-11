@@ -68,9 +68,8 @@ def createTestView(request):
             contest.Author=request.user
             print(request.user)
             contest.save()
-            
-            form=createQuestionUtil(contest.noOfQues)
-            return render(request,"createQuestion.html",{'form':form,})
+            form=createQuestionModelForm()
+            return render(request,"createQuestion.html",{'form':form,'noOfQues':contest.noOfQues,"qNo":1,'contestId':contest.id})
         else:
             print(form.errors)
             return redirect("/")
@@ -97,8 +96,20 @@ def takeTestView(request):
 def createQuestionView(request):
     if request.method=="POST":
         form=createQuestionModelForm(request.POST)
-        print(form)
-        return redirect("/")
+        ques=form.save(commit=False)
+        contestId=request.POST.get("contestId")
+        contest=Contests.objects.get(pk=contestId)
+        ques.contest=contest
+        ques.save()
+
+
+        qNo=int(request.POST.get("qNo"))+1
+        form=createQuestionModelForm()
+
+        if qNo > contest.noOfQues:
+            return redirect("/")
+        return render(request,"createQuestion.html",{'form':form,'noOfQues':contest.noOfQues,"qNo":qNo,'contestId':contest.id})
     else:
-        redirect("/")
+        form=createQuestionModelForm()
+        return render(request,"createQuestion.html",{'form':form,'noOfQues':contest.noOfQues,"qNo":1,'contestId':contest.id})
 
