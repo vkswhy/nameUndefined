@@ -4,13 +4,6 @@ from django.contrib.auth.decorators import login_required
 from .forms import registerForm,loginForm,createTestModelForm,createQuestionModelForm
 from .models import Contests,Questions
 
-def createQuestionUtil(n):
-    questions=[]
-    for i in range(n):
-        questions.append({'index':i,'form':createQuestionModelForm()})
-
-    return questions
-
 def homePage(request):
     auth=False
     if request.user.is_authenticated:
@@ -94,13 +87,20 @@ def takeTestView(request):
     
 
 def createQuestionView(request):
+    contestId=request.POST.get("contestId")
+    contest=Contests.objects.get(pk=contestId)
+    if contestId is None:
+        redirect('/')
+    if request.user is not contest.Author:
+        redirect('/')
+    
     if request.method=="POST":
         form=createQuestionModelForm(request.POST)
         ques=form.save(commit=False)
-        contestId=request.POST.get("contestId")
-        contest=Contests.objects.get(pk=contestId)
+
         ques.contest=contest
         ques.save()
+        
 
 
         qNo=int(request.POST.get("qNo"))+1
