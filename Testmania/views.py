@@ -1,8 +1,10 @@
 from django.shortcuts import render,HttpResponse,redirect
+from django.http import JsonResponse
 from django.contrib.auth import login,logout,authenticate
 from django.contrib.auth.decorators import login_required
 from .forms import registerForm,loginForm,createTestModelForm,createQuestionModelForm
 from .models import Contests,Questions
+from random import randint
 
 def homePage(request):
     auth=False
@@ -74,11 +76,15 @@ def createTestView(request):
 
 @login_required
 def takeTestView(request):
+    
     if request.method=='POST':
         id=request.POST.get('id')
         query_set=Contests.objects.filter(pk=id)
+        print("we were here")
         if query_set.count()>0:
-            return HttpResponse('SUCCess')
+            questDetail=displayUtil(request,query_set[0])
+            return render(request,"displayQuestion.html",questDetail)
+
         else:
             return HttpResponse('ERRor')
         return HttpResponse('success')
@@ -100,7 +106,7 @@ def createQuestionView(request):
 
         ques.contest=contest
         ques.save()
-        
+
 
 
         qNo=int(request.POST.get("qNo"))+1
@@ -112,4 +118,55 @@ def createQuestionView(request):
     else:
         form=createQuestionModelForm()
         return render(request,"createQuestion.html",{'form':form,'noOfQues':contest.noOfQues,"qNo":1,'contestId':contest.id})
+
+def displayQuesView(request):
+    if request.method=="POST":
+        quesId=request.POST.get('quesId')
+        contestId=request.POST.get('contestId')
+        option=request.POST.get('option')
+        print(contestId,quesId,"question")
+        q=Questions.objects.get(pk=quesId)
+        if option=='A':
+            q.responseA.add(request.user)
+        elif option=='B':
+            q.responseB.add(request.user)
+        elif option=='C':
+            q.responseC.add(request.user)
+        else:
+            q.responseD.add(request.user)
+        q.save()
+        
+        contest=Contests.objects.get(pk=contestId)
+        questDetail=displayUtil(request,contest)
+        if questDetail is None:
+            return HttpResponse("Thank You")
+        return render(request,"displayQuestion.html",questDetail)
+
+
+    else:
+
+        return redirect('/takeTest/')
+
+
+def displayUtil(request,contestobj):
+    questionSet=Questions.objects.filter(contest=contestobj).exclude(responseA=request.user).exclude(responseB=request.user).exclude(responseC=request.user).exclude(responseD=request.user)
+    n=len(questionSet)
+    if n==0:
+        return None
+    index=randint(0,n-1)
+    print(n,index)
+    ques=questionSet[index]
+    tNo=contestobj.noOfQues
+    quesDetail={
+        'contestId':contestobj.id,
+        'quesId':ques.id,
+        'ques':ques.question,
+        'A':ques.optionA,
+        'B':ques.optionB,
+        'C':ques.optionC,
+        'D':ques.optionD,
+        'tNo':tNo,
+        'quesNo':tNo-n+1
+    }
+    return quesDetail
 
