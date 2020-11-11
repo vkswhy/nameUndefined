@@ -66,7 +66,6 @@ def createTestView(request):
             contest.Author=request.user
             print(request.user)
             contest.save()
-            
             form=createQuestionUtil(contest.noOfQues)
             return render(request,"createQuestion.html",{'form':form,})
         else:
@@ -76,8 +75,6 @@ def createTestView(request):
         form=createTestModelForm()
         print(form)
         return render(request,"createTest.html",{'form':form})
-
-
 @login_required
 def takeTestView(request):
     if request.method=='POST':
@@ -100,4 +97,3 @@ def createQuestionView(request):
         return redirect("/")
     else:
         redirect("/")
-
