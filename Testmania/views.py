@@ -15,7 +15,8 @@ def homePage(request):
 
 #To display Registration Page
 def registerView(request):
-    
+    if request.user.is_authenticated:
+        return redirect("/")
     if request.method=="POST":
         form=registerForm(request.POST)
         if form.is_valid():
@@ -33,6 +34,8 @@ def registerView(request):
 
 #To display login Page
 def loginView(request):
+    if request.user.is_authenticated:
+        return redirect("/")
     if request.method=="POST":
         form=loginForm(request.POST)
         if form.is_valid():
@@ -41,7 +44,6 @@ def loginView(request):
 
             user=authenticate(request,username=username,
             password=password)
-            print("here",user)
             if user is not None:
                 login(request,user)
                 return redirect("/")
@@ -67,20 +69,16 @@ def createTestView(request):
     if request.method=="POST":
         form=createTestModelForm(request.POST)
         if form.is_valid():
-            print(form.cleaned_data)
             contest=form.save(commit=False)
             contest.Author=request.user
-            print(request.user)
             contest.save()
             form=createQuestionModelForm()
-            return render(request,"createQuestion.html",{'form':form,'noOfQues':contest.noOfQues,"qNo":1,'contestId':contest.id})
+            return render(request,"createQuestion.html",{'form':form,'noOfQues':contest.noOfQues,"qNo":1,'contestId':contest.id,'a':True,'username':request.user.username})
         else:
-            print(form.errors)
             return redirect("/")
     else:
         form=createTestModelForm()
-        print(form)
-        return render(request,"createTest.html",{'form':form})
+        return render(request,"createTest.html",{'form':form,'a':True,'username':request.user.username})
 
 
 #To display take test Page
@@ -90,16 +88,17 @@ def takeTestView(request):
     if request.method=='POST':
         id=request.POST.get('id')
         query_set=Contests.objects.filter(pk=id)
-        print("we were here")
         if query_set.count()>0:
             questDetail=displayUtil(request,query_set[0])
             if questDetail is None:
                 return HttpResponse("Submitted")
+            questDetail.update(getUser(request))
+            query_set[0].participants.add(request.user)
             return render(request,"displayQuestion.html",questDetail)
 
         else:
             return HttpResponse('ERRor')
-    return render(request,'takeTest.html')
+    return render(request,'takeTest.html',{'a':True,'username':request.user.username})
     
     
 #for create Question Page
@@ -126,10 +125,10 @@ def createQuestionView(request):
 
         if qNo > contest.noOfQues:
             return redirect("/")
-        return render(request,"createQuestion.html",{'form':form,'noOfQues':contest.noOfQues,"qNo":qNo,'contestId':contest.id})
+        return render(request,"createQuestion.html",{'form':form,'noOfQues':contest.noOfQues,"qNo":qNo,'contestId':contest.id,'a':True,'username':request.user.username})
     else:
         form=createQuestionModelForm()
-        return render(request,"createQuestion.html",{'form':form,'noOfQues':contest.noOfQues,"qNo":1,'contestId':contest.id})
+        return render(request,"createQuestion.html",{'form':form,'noOfQues':contest.noOfQues,"qNo":1,'contestId':contest.id,'a':True,'username':request.user.username})
 
 #for display questions
 @login_required
@@ -138,7 +137,6 @@ def displayQuesView(request):
         quesId=request.POST.get('quesId')
         contestId=request.POST.get('contestId')
         option=request.POST.get('option')
-        print(contestId,quesId,"question")
         q=Questions.objects.get(pk=quesId)
         if option=='A':
             q.responseA.add(request.user)
@@ -152,8 +150,10 @@ def displayQuesView(request):
         
         contest=Contests.objects.get(pk=contestId)
         questDetail=displayUtil(request,contest)
+        
         if questDetail is None:
             return HttpResponse("Thank You")
+        questDetail.update(getUser(request))
         return render(request,"displayQuestion.html",questDetail)
 
 
@@ -219,7 +219,7 @@ def contestCreatedDetails(request):
 
 def contestTakenDetails(request):
     user=request.user
-    querySet=Contests.objects.filter(Author=user)
+    querySet=Contests.objects.filter(participants=user)
     contestArray=[]
     for i in querySet:
         score=getScore(user,i)
