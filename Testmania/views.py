@@ -6,12 +6,14 @@ from .forms import registerForm,loginForm,createTestModelForm,createQuestionMode
 from .models import Contests,Questions
 from random import randint
 
+#To display Home Page
 def homePage(request):
     auth=False
     if request.user.is_authenticated:
         auth=True
     return render(request,'index.html',{'a':auth,'username':request.user.username,'info':"in the home page"})
 
+#To display Registration Page
 def registerView(request):
     
     if request.method=="POST":
@@ -28,6 +30,8 @@ def registerView(request):
         form=registerForm()
         return render(request,'register.html',{'form':form})
 
+
+#To display login Page
 def loginView(request):
     if request.method=="POST":
         form=loginForm(request.POST)
@@ -49,10 +53,15 @@ def loginView(request):
         form=loginForm()
         return render(request,"login.html",{"form":form,"info":"please input the details to login"})
 
+
+#To display logout Page
+@login_required
 def logoutView(request):
     logout(request)
     return redirect('/')
 
+
+#To display create test Page
 @login_required
 def createTestView(request):
     if request.method=="POST":
@@ -74,6 +83,7 @@ def createTestView(request):
         return render(request,"createTest.html",{'form':form})
 
 
+#To display take test Page
 @login_required
 def takeTestView(request):
     
@@ -83,15 +93,17 @@ def takeTestView(request):
         print("we were here")
         if query_set.count()>0:
             questDetail=displayUtil(request,query_set[0])
+            if questDetail is None:
+                return HttpResponse("Submitted")
             return render(request,"displayQuestion.html",questDetail)
 
         else:
             return HttpResponse('ERRor')
-        return HttpResponse('success')
     return render(request,'takeTest.html')
     
     
-
+#for create Question Page
+@login_required
 def createQuestionView(request):
     contestId=request.POST.get("contestId")
     contest=Contests.objects.get(pk=contestId)
@@ -119,6 +131,8 @@ def createQuestionView(request):
         form=createQuestionModelForm()
         return render(request,"createQuestion.html",{'form':form,'noOfQues':contest.noOfQues,"qNo":1,'contestId':contest.id})
 
+#for display questions
+@login_required
 def displayQuesView(request):
     if request.method=="POST":
         quesId=request.POST.get('quesId')
@@ -147,7 +161,7 @@ def displayQuesView(request):
 
         return redirect('/takeTest/')
 
-
+#utility function to display a question
 def displayUtil(request,contestobj):
     questionSet=Questions.objects.filter(contest=contestobj).exclude(responseA=request.user).exclude(responseB=request.user).exclude(responseC=request.user).exclude(responseD=request.user)
     n=len(questionSet)
@@ -169,4 +183,3 @@ def displayUtil(request,contestobj):
         'quesNo':tNo-n+1
     }
     return quesDetail
-
