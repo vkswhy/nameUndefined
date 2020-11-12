@@ -11,6 +11,7 @@ class Contests(models.Model):
     endDate=models.DateField()
     endTime=models.TimeField()
     timePerQues=models.CharField(blank=True,max_length=12,default=None)
+    participants=models.ManyToManyField(User,related_name="contest_participants")
 
 
 

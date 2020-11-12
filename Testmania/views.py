@@ -160,6 +160,17 @@ def displayQuesView(request):
     else:
 
         return redirect('/takeTest/')
+        
+
+@login_required
+def dashboardView(request):
+    form=getUser(request)
+    form.update({"contestCreated":contestCreatedDetails(request)})
+    form.update({"contestTaken":contestTakenDetails(request)})
+
+    return render(request,"dashboard.html",form)
+
+
 
 #utility function to display a question
 def displayUtil(request,contestobj):
@@ -168,7 +179,6 @@ def displayUtil(request,contestobj):
     if n==0:
         return None
     index=randint(0,n-1)
-    print(n,index)
     ques=questionSet[index]
     tNo=contestobj.noOfQues
     quesDetail={
@@ -183,3 +193,71 @@ def displayUtil(request,contestobj):
         'quesNo':tNo-n+1
     }
     return quesDetail
+
+
+def contestCreatedDetails(request):
+    user=request.user
+    querySet=Contests.objects.filter(Author=user)
+    contestArray=[]
+    for i in querySet:
+        noOfPart=len(i.participants.all())
+        td={
+            "contest":i.contest,
+            "noOfParticipants":noOfPart,
+            "startDate":i.startDate,
+            "startTime":i.startTime,
+            "endDate":i.endDate,
+            "endTime":i.endTime,
+
+        }
+
+        contestArray.append(td)
+
+    return contestArray
+
+
+
+def contestTakenDetails(request):
+    user=request.user
+    querySet=Contests.objects.filter(Author=user)
+    contestArray=[]
+    for i in querySet:
+        score=getScore(user,i)
+        td={
+            "contest":i.contest,
+            "score":str(score)+"/"+str(i.noOfQues),
+            "startDate":i.startDate,
+            "startTime":i.startTime,
+            "endDate":i.endDate,
+            "endTime":i.endTime,
+            }
+
+        contestArray.append(td)
+
+    return contestArray
+
+
+def getScore(user,contest):
+    queryset=Questions.objects.filter(contest=contest)
+    score=0
+    for i in queryset:
+        if i.answer=='A':
+            if user in i.responseA.all():
+                score+=1
+        if i.answer=='B':
+            if user in i.responseB.all():
+                score+=1   
+        if i.answer=='C':
+            if user in i.responseC.all():
+                score+=1 
+        if i.answer=='D':
+            if user in i.responseD.all():
+                score+=1    
+    return score             
+                
+                         
+def getUser(request):
+    auth=False
+    if request.user.is_authenticated:
+        auth=True
+    return {'a':auth,'username':request.user.username,'info':""}
