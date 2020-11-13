@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib import admin
 
 class Contests(models.Model):
-    contest=models.CharField(blank=True,max_length=50,default=None)
+    contest=models.CharField(blank=True,max_length=55,default=None)
     Author=models.ForeignKey(User, on_delete=models.CASCADE,blank=True)
     noOfQues=models.IntegerField(blank=True,default=None)
     startDate=models.DateField()
@@ -13,7 +13,11 @@ class Contests(models.Model):
     timePerQues=models.CharField(blank=True,max_length=12,default=None)
     participants=models.ManyToManyField(User,related_name="contest_participants")
 
-
+class Profile(models.Model):
+    user=models.OneToOneField(User,null=True,on_delete=models.CASCADE)
+    Profile_pic=models.ImageField(upload_to='media')
+    Roll_no=models.IntegerField(blank=True,default=None)
+    Branch=models.CharField(blank=True,max_length=30,default=None)
 
 class Questions(models.Model):
     answerChoices=[
@@ -36,3 +40,5 @@ class Questions(models.Model):
 
 admin.site.register(Contests)
 admin.site.register(Questions)
+admin.site.register(Profile)
+

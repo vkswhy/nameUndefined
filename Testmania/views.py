@@ -2,10 +2,9 @@ from django.shortcuts import render,HttpResponse,redirect
 from django.http import JsonResponse
 from django.contrib.auth import login,logout,authenticate
 from django.contrib.auth.decorators import login_required
-from .forms import registerForm,loginForm,createTestModelForm,createQuestionModelForm
+from .forms import registerForm,loginForm,createTestModelForm,createQuestionModelForm,updateProfileForm
 from .models import Contests,Questions
 from random import randint
-
 #To display Home Page
 def homePage(request):
     auth=False
@@ -78,6 +77,8 @@ def createTestView(request):
             return redirect("/")
     else:
         form=createTestModelForm()
+        print(form)
+        return render(request,"createTest.html",{'form':form})
         return render(request,"createTest.html",{'form':form,'a':True,'username':request.user.username})
 
 
@@ -95,7 +96,6 @@ def takeTestView(request):
             questDetail.update(getUser(request))
             query_set[0].participants.add(request.user)
             return render(request,"displayQuestion.html",questDetail)
-
         else:
             return HttpResponse('ERRor')
     return render(request,'takeTest.html',{'a':True,'username':request.user.username})
@@ -114,7 +114,6 @@ def createQuestionView(request):
     if request.method=="POST":
         form=createQuestionModelForm(request.POST)
         ques=form.save(commit=False)
-
         ques.contest=contest
         ques.save()
 
@@ -128,8 +127,23 @@ def createQuestionView(request):
         return render(request,"createQuestion.html",{'form':form,'noOfQues':contest.noOfQues,"qNo":qNo,'contestId':contest.id,'a':True,'username':request.user.username})
     else:
         form=createQuestionModelForm()
-        return render(request,"createQuestion.html",{'form':form,'noOfQues':contest.noOfQues,"qNo":1,'contestId':contest.id,'a':True,'username':request.user.username})
-
+        return render(request,"createQuestion.html",{'form':form,'noOfQues':contest.noOfQues,"qNo":1,'contestId':contest.id})
+@login_required
+def profileView(request):
+    if request.method=='POST':
+        try:
+            form=updateProfileForm(request.POST,request.FILES,instance=request.user.profile)
+            # print('hello already user')
+            form.save()
+        except:
+            form=updateProfileForm(request.POST,request.FILES)
+            profile=form.save()
+            profile.user=request.user
+            profile.save()
+        return redirect('/')
+    else:
+        form=updateProfileForm()
+        return render(request,'profile.html',{'form':form})
 #for display questions
 @login_required
 def displayQuesView(request):
@@ -169,8 +183,6 @@ def dashboardView(request):
     form.update({"contestTaken":contestTakenDetails(request)})
 
     return render(request,"dashboard.html",form)
-
-
 
 #utility function to display a question
 def displayUtil(request,contestobj):
@@ -253,9 +265,7 @@ def getScore(user,contest):
         if i.answer=='D':
             if user in i.responseD.all():
                 score+=1    
-    return score             
-                
-                         
+    return score                     
 def getUser(request):
     auth=False
     if request.user.is_authenticated:
