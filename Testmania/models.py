@@ -11,7 +11,13 @@ class Contests(models.Model):
     endDate=models.DateField()
     endTime=models.TimeField()
     timePerQues=models.CharField(blank=True,max_length=12,default=None)
-    
+
+class Profile(models.Model):
+    user=models.OneToOneField(User,null=True,on_delete=models.CASCADE)
+    Profile_pic=models.ImageField(upload_to='media')
+    Roll_no=models.IntegerField(blank=True,default=None)
+    Branch=models.CharField(blank=True,max_length=30,default=None)
+
 class Questions(models.Model):
     answerChoices=[
         ('A','Option A'),
@@ -33,3 +39,5 @@ class Questions(models.Model):
 
 admin.site.register(Contests)
 admin.site.register(Questions)
+admin.site.register(Profile)
+

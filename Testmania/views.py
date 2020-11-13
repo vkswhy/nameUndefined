@@ -1,8 +1,9 @@
 from django.shortcuts import render,HttpResponse,redirect
 from django.contrib.auth import login,logout,authenticate
 from django.contrib.auth.decorators import login_required
-from .forms import registerForm,loginForm,createTestModelForm,createQuestionModelForm
-from .models import Contests,Questions
+from .forms import registerForm,loginForm,createTestModelForm,createQuestionModelForm,updateProfileForm
+from .models import Contests,Questions,Profile
+from django.contrib.auth.models import User
 
 def homePage(request):
     auth=False
@@ -74,7 +75,10 @@ def takeTestView(request):
         id=request.POST.get('id')
         query_set=Contests.objects.filter(pk=id)
         if query_set.count()>0:
-            return HttpResponse('SUCCess')
+            ques=Questions.objects.filter(contest_id=id)
+
+            value={'questions':question}
+            return render(request,'questions.html',value)
         else:
             return HttpResponse('ERRor')
         return HttpResponse('success')
@@ -94,12 +98,8 @@ def createQuestionView(request):
     if request.method=="POST":
         form=createQuestionModelForm(request.POST)
         ques=form.save(commit=False)
-
         ques.contest=contest
         ques.save()
-        
-
-
         qNo=int(request.POST.get("qNo"))+1
         form=createQuestionModelForm()
 
@@ -109,3 +109,20 @@ def createQuestionView(request):
     else:
         form=createQuestionModelForm()
         return render(request,"createQuestion.html",{'form':form,'noOfQues':contest.noOfQues,"qNo":1,'contestId':contest.id})
+@login_required
+def profileView(request):
+    if request.method=='POST':
+        try:
+            form=updateProfileForm(request.POST,request.FILES,instance=request.user.profile)
+            # print('hello already user')
+            form.save()
+        except:
+            form=updateProfileForm(request.POST,request.FILES)
+            profile=form.save()
+            profile.user=request.user
+            profile.save()
+        return redirect('/')
+    else:
+        form=updateProfileForm()
+        return render(request,'profile.html',{'form':form})
+        
