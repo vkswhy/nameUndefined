@@ -2,7 +2,7 @@ from django.shortcuts import render,HttpResponse,redirect
 from django.http import JsonResponse
 from django.contrib.auth import login,logout,authenticate
 from django.contrib.auth.decorators import login_required
-from .forms import registerForm,loginForm,createTestModelForm,createQuestionModelForm
+from .forms import registerForm,loginForm,createTestModelForm,createQuestionModelForm,updateProfileForm
 from .models import Contests,Questions
 from random import randint
 #To display Home Page
@@ -183,8 +183,6 @@ def dashboardView(request):
     form.update({"contestTaken":contestTakenDetails(request)})
 
     return render(request,"dashboard.html",form)
-
-
 
 #utility function to display a question
 def displayUtil(request,contestobj):
