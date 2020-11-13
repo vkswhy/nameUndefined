@@ -12,7 +12,7 @@
 </head>
 <body style="height:100vh;padding:0">
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">TestMania</a>
+        <a class="navbar-brand" href="/#">TestMania</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
             aria-expanded="false" aria-label="Toggle navigation" ></button>
         <div class="collapse navbar-collapse" id="collapsibleNavId">
@@ -21,6 +21,9 @@
                     <li class="nav-link active">hello, {{username}}</li>
                     <li class="nav-item">
                         <a class="nav-link" href="/logout"><button class="btn-secondary">Log out</button></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/dashboard"><button class="btn-secondary">DashBoard</button></a>
                     </li>
                 {% else %}
                     <li class="nav-item">
@@ -49,3 +52,5 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-alpha2/js/bootstrap.min.js"></script>
 </body>
 </html>
+
+

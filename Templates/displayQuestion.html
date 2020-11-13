@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block bodyContent %}
+<div>
+<h1>Question: {{quesNo}}/{{tNo}}</h1><span></span>
+  <form action="/displayQuestions/" method="POST">
+    {% csrf_token %}
+    <input type="text" name="contestId" value={{contestId}} hidden>
+    <input type="text" name="quesId" value={{quesId}} hidden>
+
+    <div id ="ques">{{ques}}</div>
+
+    <div>
+        <label for='optionA' style=' padding: 5px; '>
+          <input type='radio' name='option' value='A' id='optionA' style='transform: scale(1.6); margin-right: 10px; vertical-align: middle; margin-top: -2px;' />
+          {{A}}</label>
+    </div>
+    <div>
+        <label for='optionB' style=' padding: 5px; '>
+          <input type='radio' name='option' value='B' id='optionB' style='transform: scale(1.6); margin-right: 10px; vertical-align: middle; margin-top: -2px;' />
+          {{B}}</label>
+    </div>
+    <div>
+        <label for='optionC' style=' padding: 5px; '>
+          <input type='radio' name='option' value='C' id='optionC' style='transform: scale(1.6); margin-right: 10px; vertical-align: middle; margin-top: -2px;' />
+          {{C}}</label>
+    </div>
+    <div>
+        <label for='optionD' style=' padding: 5px; '>
+          <input type='radio' name='option' value='D' id='optionD' style='transform: scale(1.6); margin-right: 10px; vertical-align: middle; margin-top: -2px;' />
+          {{D}}</label>
+    </div>
+
+    <input id="submit" type="submit" value="Submit">
+  </form>
+</div>
+<script>
+
+    function loadDoc() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        console.log(this.responseText);
+      document.getElementById("ques").innerHTML = this.responseText;
+    }
+  };
+  xhttp.open("GET", "/displayQuestions/", true);
+  xhttp.setRequestHeader('X-Requested-With','XMLHttpRequest');
+  xhttp.setRequestHeader('X-CSRFToken': {% csrf_token %});
+  console.log("done");
+  xhttp.send();
+}
+
+
+
+</script>
+
+{% endblock bodyContent %}
