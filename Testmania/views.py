@@ -12,7 +12,7 @@ def homePage(request):
         auth=True
     return render(request,'index.html',{'a':auth,'username':request.user.username,'info':"in the home page"})
 
-#To display Registration Page
+# To display Registration Page
 def registerView(request):
     if request.user.is_authenticated:
         return redirect("/")
