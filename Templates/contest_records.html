@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block bodyContent %}
+<div class="d-flex flex-row">
+    <div class="container">
+        <div>
+            <h1>Participants</h1>
+            <table class="table-bordered">
+            <tr>
+                <th>Name</th>
+                <th>Score</th>
+                <th>Email</th>
+                <th>Branch</th>
+                <th>Roll_no</th>
+
+            </tr>
+            
+
+            {% for i in participants %}
+            <tr>
+            <td>{{i.0}}</td>
+            
+            <td>{{i.1}}</td>
+            <td>{{i.2}}</td>
+            <td>{{i.3}}</td>
+            <td>{{i.4}}</td>  
+            </tr>
+            
+            {% endfor %}
+            </table>
+        </div>
+        
+       </div>
+</div>
+
+{% endblock bodyContent %} 

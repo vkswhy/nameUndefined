@@ -6,6 +6,7 @@
             <h1>Test Created</h1>
             <table class="table-bordered">
             <tr>
+                <th>ID</th>
                 <th>Test</th>
                 <th>No. of participants</th>
                 <th>Start Date</th>
@@ -14,16 +15,19 @@
                 <th>End Time</th>
 
             </tr>
+            
+
             {% for i in contestCreated %}
             <tr>
-            <td>{{i.contest}}</td>
+            <td>{{i.id}}</td>
+            <td><a href="/contest_records/{{i.id}}" name="contest_name">{{i.contest}}</a></td>
             <td>{{i.noOfParticipants}}</td>
             <td>{{i.startDate}}</td>
             <td>{{i.startTime}}</td>
-            <td>{{i.endDate}}</td>
+            <td>{{i.endDate}}</td>  
             <td>{{i.endTime}}</td>
-
             </tr>
+            
             {% endfor %}
             </table>
         </div>

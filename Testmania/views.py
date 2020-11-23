@@ -3,8 +3,9 @@ from django.http import JsonResponse
 from django.contrib.auth import login,logout,authenticate
 from django.contrib.auth.decorators import login_required
 from .forms import registerForm,loginForm,createTestModelForm,createQuestionModelForm,updateProfileForm
-from .models import Contests,Questions
+from .models import Contests,Questions,Profile
 from random import randint
+from django.contrib.auth.models import User
 #To display Home Page
 def homePage(request):
     auth=False
@@ -253,6 +254,7 @@ def contestCreatedDetails(request):
     for i in querySet:
         noOfPart=len(i.participants.all())
         td={
+            "id":i.id, 
             "contest":i.contest,
             "noOfParticipants":noOfPart,
             "startDate":i.startDate,
@@ -274,7 +276,9 @@ def contestTakenDetails(request):
     contestArray=[]
     for i in querySet:
         score=getScore(user,i)
+        print('hello',i.id)
         td={
+            "id":i.id,
             "contest":i.contest,
             "score":str(score)+"/"+str(i.noOfQues),
             "startDate":i.startDate,
@@ -282,7 +286,6 @@ def contestTakenDetails(request):
             "endDate":i.endDate,
             "endTime":i.endTime,
             }
-
         contestArray.append(td)
 
     return contestArray
@@ -303,10 +306,23 @@ def getScore(user,contest):
                 score+=1 
         if i.answer=='D':
             if user in i.responseD.all():
-                score+=1    
+                score+=1 
     return score                     
 def getUser(request):
     auth=False
     if request.user.is_authenticated:
         auth=True
     return {'a':auth,'username':request.user.username,'info':""}
+    
+def contest_records(request,contest_id):
+    query=User.objects.filter(contest_participants=contest_id)
+    values=[]
+    for i in query:
+        try:
+            obj=i.profile
+            values.append([i.username,getScore(i,contest_id),i.email,obj.Branch,obj.Roll_no])
+        except:
+            values.append([i.username,getScore(i,contest_id),i.email,'not_updated_profile','not_updated_profile'])
+
+    return render(request,'contest_records.html',{'participants':values})
+
