@@ -182,8 +182,19 @@ def dashboardView(request):
     form=getUser(request)
     form.update({"contestCreated":contestCreatedDetails(request)})
     form.update({"contestTaken":contestTakenDetails(request)})
+    
+    values=[]
+    obj=request.user
+    try:
+        pf=obj.profile
+        values.append([obj.username,obj.email,pf.Branch,pf.Profile_pic,pf.Roll_no])
+    except:
+        values.append([obj.username,obj.email,'not provided','not provided','not provided'])
+
+    form.update({"detail":values})  
 
     return render(request,"dashboard.html",form)
+
 
 #utility function to display a question
 def displayUtil(request,contestobj):
@@ -274,7 +285,7 @@ def getUser(request):
     if request.user.is_authenticated:
         auth=True
     return {'a':auth,'username':request.user.username,'info':""}
-    
+
 def contest_records(request,contest_id):
     query=User.objects.filter(contest_participants=contest_id)
     values=[]
