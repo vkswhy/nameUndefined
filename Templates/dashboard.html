@@ -48,6 +48,7 @@
             <h1>Test Taken</h1>
             <table class="table-bordered">
             <tr>
+                <th>id</th>
                 <th>Test</th>
                 <th>Score</th>
                 <th>Start Date</th>
@@ -58,7 +59,8 @@
             </tr>
             {% for i in contestTaken %}
             <tr>
-            <td>{{i.contest}}</td>
+            <td>{{i.id}}</td>
+            <td><a href="/testTakenDetails/{{i.id}}">{{i.contest}}</a></td>
             <td>{{i.score}}</td>
             <td>{{i.startDate}}</td>
             <td>{{i.startTime}}</td>

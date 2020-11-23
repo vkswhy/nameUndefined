@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block bodyContent %}
+<div class="container">
+<h2>Response of {{contestName}}</h2>
+{% for i in questionDetails %} 
+<div style="background:lightblue; border:1px solid; border-radius:3px; margin:2px">
+    {% comment %} <input type="text" name="quesId" value={{quesId}} hidden> {% endcomment %}
+
+    <div id ="ques">{{i.quesNo}}. {{i.question}}</div>
+
+    <div>
+        <label for='optionA' style=' padding: 5px; '>
+          <input type='radio' name={{i.name}} value='A' id='optionA' style='transform: scale(1.6); margin-right: 10px; vertical-align: middle; margin-top: -2px;' {{i.responseA|yesno:"checked,"}} disabled/>
+          {{i.A}}</label>
+    </div>
+    <div>
+        <label for='optionB' style=' padding: 5px; '>
+          <input type='radio' name={{i.name}} value='B' id='optionB' style='transform: scale(1.6); margin-right: 10px; vertical-align: middle; margin-top: -2px;' {{i.responseB|yesno:"checked,"}} disabled/>
+          {{i.B}}</label>
+    </div>
+    <div>
+        <label for='optionC' style=' padding: 5px; '>
+          <input type='radio' name={{i.name}} value='C' id='optionC' style='transform: scale(1.6); margin-right: 10px; vertical-align: middle; margin-top: -2px;' {{i.responseC|yesno:"checked,"}} disabled/>
+          {{i.C}}</label>
+    </div>
+    <div>
+        <label for='optionD' style=' padding: 5px; '>
+          <input type='radio' name={{i.name}} value='D' id='optionD' style='transform: scale(1.6); margin-right: 10px; vertical-align: middle; margin-top: -2px;' {{i.responseD|yesno:"checked,"}} disabled/>
+          {{i.D}}</label>
+    </div>
+    correct answer: {{i.answer}}
+</div>
+{% endfor %}
+</div>
+{% endblock bodyContent %}
