@@ -78,8 +78,6 @@ def createTestView(request):
             return redirect("/")
     else:
         form=createTestModelForm()
-        print(form)
-        return render(request,"createTest.html",{'form':form})
         return render(request,"createTest.html",{'form':form,'a':True,'username':request.user.username})
 
 
@@ -128,7 +126,7 @@ def createQuestionView(request):
         return render(request,"createQuestion.html",{'form':form,'noOfQues':contest.noOfQues,"qNo":qNo,'contestId':contest.id,'a':True,'username':request.user.username})
     else:
         form=createQuestionModelForm()
-        return render(request,"createQuestion.html",{'form':form,'noOfQues':contest.noOfQues,"qNo":1,'contestId':contest.id})
+        return render(request,"createQuestion.html",{'form':form,'noOfQues':contest.noOfQues,"qNo":1,'contestId':contest.id,'a':True,'username':request.user.username})
 @login_required
 def profileView(request):
     if request.method=='POST':
@@ -144,7 +142,7 @@ def profileView(request):
         return redirect('/')
     else:
         form=updateProfileForm()
-        return render(request,'profile.html',{'form':form})
+        return render(request,'profile.html',{'form':form,'a':True,'username':request.user.username})
 #for display questions
 @login_required
 def displayQuesView(request):
@@ -185,38 +183,52 @@ def dashboardView(request):
 
     return render(request,"dashboard.html",form)
 
-
 @login_required
 def testTakenDetailView(request,contestId):
     contest=Contests.objects.get(id=contestId)
     user=request.user
+    form=getUser(request)
+    form.update({"questionDetails":testTakendetailsUtil(contest,user),"contestName":contest.contest})
+    print(form)
+    return render(request,"testTakendetail.html",form)
 
 
 
 
-def testTakenUtil(contest,user):
+
+def testTakendetailsUtil(contest,user):
     q=Questions.objects.filter(contest=contest)
     questionArray=[]
     counter=1
     for i in q:
-        rA=""
-        rB=""
-        rC=""
-        rD=""
+        rA=False
+        rB=False
+        rC=False
+        rD=False
         if user in i.responseA.all():
-            rA="checked"
+            rA=True
         if user in i.responseB.all():
-            rB="checked"
+            rB=True
         if user in i.responseC.all():
-            rC="checked"
+            rC=True
         if user in i.responseD.all():
-            rD="checked"
-        j={
+            rD=True
+        j={"quesNo":counter,
+            "name":"option"+str(i.id),
+            "question":i.question,
+            "A":i.optionA,
+            "B":i.optionB,
+            "C":i.optionC,
+            "D":i.optionD,
             "responseA":rA,
             "responseB":rB,
             "responseC":rC,
             "responseD":rD,
+            "answer":i.answer,
         }
+        counter+=1
+        questionArray.append(j)
+    return questionArray
 
 
 
@@ -276,7 +288,6 @@ def contestTakenDetails(request):
     contestArray=[]
     for i in querySet:
         score=getScore(user,i)
-        print('hello',i.id)
         td={
             "id":i.id,
             "contest":i.contest,

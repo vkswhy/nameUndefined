@@ -11,7 +11,7 @@ urlpatterns=[
     path("updateProfile/",profileView),
     path("displayQuestions/",displayQuesView),
     path("dashboard/",dashboardView),
-    path("testTakenDetail/<int:contestId>",testTakenDetailView),
+    path("testTakenDetails/<int:contestId>",testTakenDetailView),
     path("contest_records/<int:contest_id>/",contest_records),
 ]
 
