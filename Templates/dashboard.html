@@ -1,8 +1,22 @@
 {% extends 'base.html' %}
+ {% load static %}
 {{% block bodyContent %}
 <div class="d-flex flex-row"style="min-width=100%">
 <div class="container" id="userProfile"></div>
 
+<div class="d-flex flex-row">
+    <div>
+        {% for i in detail %}
+        <h1>{{i.0}}</h1>
+        <h1>{{i.1}}</h1>
+        <h1>{{i.2}}</h1>
+        <h1>{{i.3}}</h1>
+        <img src="{% static 'WhatsApp_Image_2020-02-03_at_7.35.22_PM_0fIE6Dn.jpeg' %}" alt="hello">
+        <h1>{{i.4}}</h1>
+        
+        {% endfor %}
+
+    </div>
     <div class="container">
         <div>
             <h1>Test Created</h1>
