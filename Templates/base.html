@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+{% load static %}
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <meta name="Description" content="Enter your description here"/>
+<link rel="stylesheet" type="text/css" href="{% static 'stylesheets/testMania.css' %}">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-alpha2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css">
 <link rel="stylesheet" href="assets/css/style.css">
@@ -44,7 +46,7 @@
         </div>
     </nav>
     <div class="alert alert-warning alert-dismissible fade show">{{info}}</div>
-    <div class="container d-flex justify-content-center flex-grow-1 align-items-center bg-light" style="min-height:100%">
+    <div class="container d-flex justify-content-center align-items-center bg-light" style="min-height:100%">
     {%block bodyContent%}
     {%endblock%}
     </div>

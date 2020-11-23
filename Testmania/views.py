@@ -335,5 +335,5 @@ def contest_records(request,contest_id):
         except:
             values.append([i.username,getScore(i,contest_id),i.email,'not_updated_profile','not_updated_profile'])
 
-    return render(request,'contest_records.html',{'participants':values})
+    return render(request,'contest_records.html',{'participants':values,"a":True,"username":request.user.username})
 

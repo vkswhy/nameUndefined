@@ -1,0 +1,27 @@
+
+table{
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+}
+th,td{
+    border:1px solid #ddd;
+    padding:8px;
+}
+tr{
+    background-color: white;
+}
+tr:nth-child(even){
+    background-color: #f2f2f2;
+}
+tr:hover{
+    background-color: rgb(186, 215, 241);
+}
+th{
+    background-color: #7a32da;
+}
+
+#userProfile{
+    background-image: url("../userprofile.jpeg");
+    background-size: 750px;
+    background-position: center;
+}
