@@ -184,6 +184,45 @@ def dashboardView(request):
 
     return render(request,"dashboard.html",form)
 
+
+@login_required
+def testTakenDetailView(request,contestId):
+    contest=Contests.objects.get(id=contestId)
+    user=request.user
+
+
+
+
+def testTakenUtil(contest,user):
+    q=Questions.objects.filter(contest=contest)
+    questionArray=[]
+    counter=1
+    for i in q:
+        rA=""
+        rB=""
+        rC=""
+        rD=""
+        if user in i.responseA.all():
+            rA="checked"
+        if user in i.responseB.all():
+            rB="checked"
+        if user in i.responseC.all():
+            rC="checked"
+        if user in i.responseD.all():
+            rD="checked"
+        j={
+            "responseA":rA,
+            "responseB":rB,
+            "responseC":rC,
+            "responseD":rD,
+        }
+
+
+
+
+
+
+
 #utility function to display a question
 def displayUtil(request,contestobj):
     questionSet=Questions.objects.filter(contest=contestobj).exclude(responseA=request.user).exclude(responseB=request.user).exclude(responseC=request.user).exclude(responseD=request.user)
@@ -220,7 +259,7 @@ def contestCreatedDetails(request):
             "startTime":i.startTime,
             "endDate":i.endDate,
             "endTime":i.endTime,
-
+    
         }
 
         contestArray.append(td)
