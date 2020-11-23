@@ -274,6 +274,7 @@ def getUser(request):
     if request.user.is_authenticated:
         auth=True
     return {'a':auth,'username':request.user.username,'info':""}
+    
 def contest_records(request,contest_id):
     query=User.objects.filter(contest_participants=contest_id)
     values=[]
