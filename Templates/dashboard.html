@@ -7,13 +7,11 @@
 <div class="d-flex flex-row">
     <div>
         {% for i in detail %}
+        <img src="/media/{{i.3}}" style="width:50%;height:50%;" alt="hello">
         <h1>{{i.0}}</h1>
         <h1>{{i.1}}</h1>
         <h1>{{i.2}}</h1>
-        <h1>{{i.3}}</h1>
-        <img src="{% static 'WhatsApp_Image_2020-02-03_at_7.35.22_PM_0fIE6Dn.jpeg' %}" alt="hello">
         <h1>{{i.4}}</h1>
-        
         {% endfor %}
 
     </div>

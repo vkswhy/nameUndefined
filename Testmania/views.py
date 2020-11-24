@@ -185,7 +185,8 @@ def dashboardView(request):
     obj=request.user
     try:
         pf=obj.profile
-        values.append([obj.username,obj.email,pf.Branch,pf.Profile_pic,pf.Roll_no])
+        print(type(pf.Profile_pic))
+        values.append([obj.username,obj.email,pf.Branch,pf.Profile_pic,pf.Roll_no]) 
     except:
         values.append([obj.username,obj.email,'not provided','not provided','not provided'])
 
