@@ -2,26 +2,79 @@
 table{
     font-family: Arial, Helvetica, sans-serif;
     border-collapse: collapse;
+    width: 100%;
+    cellspacing:0;
+}
+tbody{
+    border:none;
 }
 th,td{
-    border:1px solid #ddd;
+    text-align: center;
     padding:8px;
+    margin:0;
+    border: 10px solid;
 }
 tr{
     background-color: white;
+    border:none;
 }
 tr:nth-child(even){
-    background-color: #f2f2f2;
+    background-color: #e7f8fb;
 }
 tr:hover{
-    background-color: rgb(186, 215, 241);
+    /* background-color: #90e0ef; */
+    box-shadow: 0 0 -.5rem 0 #04769cb9;
 }
 th{
-    background-color: #7a32da;
+    background-color:#0095c7b9;
+}
+#profilePic{
+
+    width:12vh;
+    height:12vh;
+/* border-radius: 50%; */
+}
+#userProfile{
+    flex:1;
+}
+#userDetails{
+    flex:1;
+    flex-grow: 2;
+}
+#profileName{
+    display:flex;
+    /* justify-content:center; */
+    align-items: flex-end;
+    border-bottom: 2px solid;
+    margin-bottom: 0.3rem;
+    padding:px
+    
+
 }
 
-#userProfile{
-    background-image: url("../userprofile.jpeg");
-    background-size: 750px;
-    background-position: center;
+#profileName h5{
+    /* margin-top:8px; */
+    margin-left:.5rem;
+}
+
+label{
+    padding-right:1rem;
+}
+.userBox{
+    width:100vw;  
+    box-shadow: 0 0 .5rem 0 black;
+    padding:1.2rem;
+
+}
+.userBox:hover{
+    animation: userBoxHoverAnimation 0.5s linear;
+}
+label{
+    font-weight: bold;
+}
+@keyframes userBoxHoverAnimation{
+    
+        0%{box-shadow: 0 0 .5rem 0 black;}
+        50%{box-shadow: none}
+        100%{box-shadow: 0 0 .5rem 0 black;}
 }

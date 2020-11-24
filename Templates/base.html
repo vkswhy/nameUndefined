@@ -12,8 +12,8 @@
 <link rel="stylesheet" href="assets/css/style.css">
 <title></title>
 </head>
-<body style="height:100vh;padding:0">
-    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+<body style="min-height:100vh; padding:0; max-width:100vw;">
+    <nav class="navbar navbar-expand-sm navbar-dark" style="width:100vw; background-color:#001233;">
         <a class="navbar-brand" href="/#">TestMania</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
             aria-expanded="false" aria-label="Toggle navigation" ></button>
@@ -46,7 +46,7 @@
         </div>
     </nav>
     <div class="alert alert-warning alert-dismissible fade show">{{info}}</div>
-    <div class="container d-flex justify-content-center align-items-center bg-light" style="min-height:100%">
+    <div class="container d-flex justify-content-center align-items-center bg-light" style="min-height:calc(100vh - 8.5rem); background-color:black">
     {%block bodyContent%}
     {%endblock%}
     </div>
