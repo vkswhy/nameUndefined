@@ -3,7 +3,6 @@ table{
     font-family: Arial, Helvetica, sans-serif;
     border-collapse: collapse;
     width: 100%;
-    cellspacing:0;
 }
 tbody{
     border:none;
@@ -23,7 +22,7 @@ tr:nth-child(even){
 }
 tr:hover{
     /* background-color: #90e0ef; */
-    box-shadow: 0 0 -.5rem 0 #04769cb9;
+    box-shadow: 0 0 .5rem 0 #04769cb9;
 }
 th{
     background-color:#0095c7b9;
