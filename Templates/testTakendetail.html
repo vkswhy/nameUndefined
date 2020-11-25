@@ -3,7 +3,7 @@
 <div class="container">
 <h2>Response of {{contestName}}</h2>
 {% for i in questionDetails %} 
-<div style="background:lightblue; border:1px solid; border-radius:3px; margin:2px">
+<div class="testTakenDetail">
     {% comment %} <input type="text" name="quesId" value={{quesId}} hidden> {% endcomment %}
 
     <div id ="ques">{{i.quesNo}}. {{i.question}}</div>

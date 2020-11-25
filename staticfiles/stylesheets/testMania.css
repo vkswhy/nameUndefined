@@ -1,3 +1,12 @@
+.navbar{
+    background-color:rgba(0,0,4,.5)
+}
+.header{
+    box-shadow: 0 8px 17px 0 rgba(0,0,0,.2);
+}
+.top-nav-collapse{
+    background-color:#414441;
+}
 
 table{
     font-family: Arial, Helvetica, sans-serif;
@@ -78,7 +87,7 @@ th{
 
 .userBox{
     width:100vw;  
-    box-shadow: 0 0 .5rem 0 #054b62c9;
+    box-shadow:0 0 1rem 0 #034d5a;
     border-radius: 3%;
     padding:1.2rem;
 
@@ -101,7 +110,20 @@ p:hover{
 }
 @keyframes userBoxHoverAnimation{
     
-        0%{box-shadow: 0 0 .5rem 0 #054b62c9}
+        0%{box-shadow:0 0 1rem 0.2rem #034d5a;
+        }
         50%{box-shadow: none}
-        100%{box-shadow: 0 0 .5rem 0 4 #054b62c9;}
+        100%{box-shadow:0 0 1rem 0rem #034d5a;
+        }
+}
+.testTakenDetail{
+    background-color:#e7f8fb; 
+    margin:2rem;
+    box-shadow:0 .5rem 1rem 0 #034d5a;
+    padding:2rem;
+    transition: linear .2s;
+
+}
+.testTakenDetail:hover{
+    box-shadow: none;
 }
