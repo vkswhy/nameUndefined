@@ -95,7 +95,7 @@ th{
 .userBox:hover{
     animation: userBoxHoverAnimation 0.5s linear;
 }
-label{
+#userProfile label{
     font-weight: bold;
     padding-right:2rem;
 
@@ -118,12 +118,24 @@ p:hover{
 }
 .testTakenDetail{
     background-color:#e7f8fb; 
-    margin:2rem;
-    box-shadow:0 .5rem 1rem 0 #034d5a;
+    margin:3rem 1rem;
+    box-shadow:0 0 1rem 0 #ff0000;
     padding:2rem;
-    transition: linear .2s;
+    transition: linear .4s;
 
 }
-.testTakenDetail:hover{
-    box-shadow: none;
+.incorrect:hover{
+    box-shadow: 0 0 1rem 0 #ff0000 inset;
+}
+
+.correct{
+    box-shadow: 0 0 1rem 0 rgb(8, 255, 8);
+}
+.correct:hover{
+    box-shadow: 0 0 1rem 0 rgb(0, 255, 0) inset;
+}
+#ques{
+    font: outline;
+    font-weight: bold ;
+    margin:.5rem 0.5rem 1rem;
 }

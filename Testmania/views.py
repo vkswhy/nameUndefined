@@ -200,7 +200,6 @@ def testTakenDetailView(request,contestId):
     user=request.user
     form=getUser(request)
     form.update({"questionDetails":testTakendetailsUtil(contest,user),"contestName":contest.contest})
-    print(form)
     return render(request,"testTakendetail.html",form)
 
 
@@ -216,16 +215,27 @@ def testTakendetailsUtil(contest,user):
         rB=False
         rC=False
         rD=False
+        iscorrect=False
         if user in i.responseA.all():
             rA=True
+
+            if i.answer=='A':
+                iscorrect=True
         if user in i.responseB.all():
             rB=True
+            if i.answer=='B':
+                iscorrect=True
         if user in i.responseC.all():
             rC=True
+            if i.answer=='C':
+                iscorrect=True
         if user in i.responseD.all():
             rD=True
+            if i.answer=='D':
+                iscorrect=True
         j={"quesNo":counter,
-            "name":"option"+str(i.id),
+            "isCorrect":iscorrect,
+            "name":"ques"+str(i.id),
             "question":i.question,
             "A":i.optionA,
             "B":i.optionB,
@@ -235,7 +245,7 @@ def testTakendetailsUtil(contest,user):
             "responseB":rB,
             "responseC":rC,
             "responseD":rD,
-            "answer":i.answer,
+            "answer":"option"+i.answer,
         }
         counter+=1
         questionArray.append(j)

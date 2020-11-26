@@ -3,33 +3,48 @@
 <div class="container">
 <h2>Response of {{contestName}}</h2>
 {% for i in questionDetails %} 
-<div class="testTakenDetail">
+<div class="{{i.isCorrect|yesno:"correct, incorrect"}} testTakenDetail">
     {% comment %} <input type="text" name="quesId" value={{quesId}} hidden> {% endcomment %}
 
     <div id ="ques">{{i.quesNo}}. {{i.question}}</div>
 
     <div>
         <label for='optionA' style=' padding: 5px; '>
-          <input type='radio' name={{i.name}} value='A' id='optionA' style='transform: scale(1.6); margin-right: 10px; vertical-align: middle; margin-top: -2px;' {{i.responseA|yesno:"checked,"}} disabled/>
+          <input type='radio' name={{i.name}} value='A' id={{i.name|add:"optionA"}} style='transform: scale(1.6); margin-right: 10px; vertical-align: middle; margin-top: -2px;' {{i.responseA|yesno:"checked,"}} disabled/>
           {{i.A}}</label>
     </div>
     <div>
         <label for='optionB' style=' padding: 5px; '>
-          <input type='radio' name={{i.name}} value='B' id='optionB' style='transform: scale(1.6); margin-right: 10px; vertical-align: middle; margin-top: -2px;' {{i.responseB|yesno:"checked,"}} disabled/>
+          <input type='radio' name={{i.name}} value='B' id={{i.name|add:"optionB"}} style='transform: scale(1.6); margin-right: 10px; vertical-align: middle; margin-top: -2px;' {{i.responseB|yesno:"checked,"}} disabled/>
           {{i.B}}</label>
     </div>
     <div>
         <label for='optionC' style=' padding: 5px; '>
-          <input type='radio' name={{i.name}} value='C' id='optionC' style='transform: scale(1.6); margin-right: 10px; vertical-align: middle; margin-top: -2px;' {{i.responseC|yesno:"checked,"}} disabled/>
+          <input type='radio' name={{i.name}} value='C' id={{i.name|add:"optionC"}} style='transform: scale(1.6); margin-right: 10px; vertical-align: middle; margin-top: -2px;' {{i.responseC|yesno:"checked,"}} disabled/>
           {{i.C}}</label>
     </div>
     <div>
         <label for='optionD' style=' padding: 5px; '>
-          <input type='radio' name={{i.name}} value='D' id='optionD' style='transform: scale(1.6); margin-right: 10px; vertical-align: middle; margin-top: -2px;' {{i.responseD|yesno:"checked,"}} disabled/>
+          <input type='radio' name={{i.name}} value='D' id={{i.name|add:"optionD"}} style='transform: scale(1.6); margin-right: 10px; vertical-align: middle; margin-top: -2px;' {{i.responseD|yesno:"checked,"}} disabled/>
           {{i.D}}</label>
     </div>
-    correct answer: {{i.answer}}
 </div>
 {% endfor %}
 </div>
+
+<script type="text/javascript">
+  const inputArray=document.getElementsByTagName('input')
+  for(var i = 0; i < inputArray.length; i++) {
+    var elm = inputArray[i];
+    if(elm.checked){
+      elm.parentNode.style+="; color:red; font-weight:bold";
+  }
+  }
+  let x;
+  {% for i in questionDetails %}
+    x=document.getElementById("{{i.name|add:i.answer}}").parentNode;
+    x.style+="; color:green; font-weight:bold";
+  {% endfor %}
+
+</script>
 {% endblock bodyContent %}
