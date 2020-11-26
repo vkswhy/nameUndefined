@@ -8,7 +8,7 @@
     <div id="userProfile" class"d-flex justify-content-center">
         {% for i in detail %}
         <div id="profileName"><img src="/media/{{i.5}}" id="profilePic"><h5>{{i.1}} {{i.2}}</h5>
-        <a href="/updateProfile" style="margin-left:auto"><img class="editProfile" src="{% static 'stylesheets/editProfileIcon.svg' %}"></a>
+        <a href="/updateProfile" style="margin-left:auto"><img class="editProfile" src="{% static 'graphics/editProfileIcon.svg' %}"></a>
         </div>
         <p> <label>Username:</label><span>{{i.0}}</span></p>
         <p> <label>Email:</label><span>{{i.3}}</span></p> 

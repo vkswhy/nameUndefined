@@ -267,6 +267,7 @@ def displayUtil(request,contestobj):
     ques=questionSet[index]
     tNo=contestobj.noOfQues
     quesDetail={
+        'time':contestobj.timePerQues,
         'contestId':contestobj.id,
         'quesId':ques.id,
         'ques':ques.question,

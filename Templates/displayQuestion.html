@@ -1,7 +1,10 @@
 {% extends 'base.html' %}
 {% block bodyContent %}
-<div>
-<h1>Question: {{quesNo}}/{{tNo}}</h1><span></span>
+{% load static %}
+<div class="displayQuestion">
+  <div class="displayQuestionHeading d-flex"><h4>Question: {{quesNo}}/{{tNo}}</h4>
+  <span><img src='{% static 'graphics/alarm-clock.svg' %}' alt=""> <a id="timeRemain">__:__</a> </span>
+  </div>
   <form action="/displayQuestions/" method="POST">
     {% csrf_token %}
     <input type="text" name="contestId" value={{contestId}} hidden>
@@ -34,22 +37,20 @@
   </form>
 </div>
 <script>
-
-function loadDoc() {
-  var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-        console.log(this.responseText);
-      document.getElementById("ques").innerHTML = this.responseText;
+  var time={{time}}*10;
+  setInterval(updateTime,1000);
+  function updateTime(){
+    if(time==0){
+      document.getElementById('submit').click();
+      return;
     }
-  };
-  xhttp.open("GET", "/displayQuestions/", true);
-  xhttp.setRequestHeader('X-Requested-With','XMLHttpRequest');
-  xhttp.setRequestHeader('X-CSRFToken': {% csrf_token %});
-  console.log("done");
-  xhttp.send();
-}
+    else{
+    document.getElementById('timeRemain').innerHTML=Math.floor(time/60) + ":" +time%60;
+    }
+    time-=1;
 
+ 
+  }
 
 
 </script>

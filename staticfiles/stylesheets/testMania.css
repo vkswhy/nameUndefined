@@ -1,3 +1,7 @@
+body{
+    background-image: url('../graphics/bodyBackground.jpg');
+    /* background: linear-gradient(to left, #334d50, #cbcaa5); W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
 .navbar{
     background-color:rgba(0,0,4,.5)
 }
@@ -55,7 +59,6 @@ th{
 }
 #userDetails{
     flex:1;
-
     overflow:hidden;
     overflow-x: scroll;
 
@@ -67,8 +70,6 @@ th{
     border-bottom: 2px solid #054b62c9;
     margin-bottom: 0.3rem;
     padding:px
-    
-
 }
 
 #profileName h5{
@@ -119,7 +120,7 @@ p:hover{
 .testTakenDetail{
     background-color:#e7f8fb; 
     margin:3rem 1rem;
-    box-shadow:0 0 1rem 0 #ff0000;
+    /* box-shadow:0 0 1rem 0 #ff0000; */
     padding:2rem;
     transition: linear .4s;
 
@@ -128,14 +129,35 @@ p:hover{
     box-shadow: 0 0 1rem 0 #ff0000 inset;
 }
 
-.correct{
-    box-shadow: 0 0 1rem 0 rgb(8, 255, 8);
-}
+/* .correct{
+    box-shadow: 0 0 2rem 0.1rem rgb(8, 255, 8);
+} */
 .correct:hover{
-    box-shadow: 0 0 1rem 0 rgb(0, 255, 0) inset;
+    box-shadow: 0 0 2rem 0.1rem rgb(0, 255, 0) inset;
 }
 #ques{
-    font: outline;
+    font-family: Arial, Helvetica, sans-serif;
     font-weight: bold ;
     margin:.5rem 0.5rem 1rem;
+}
+.displayQuestion{
+    width:100%;
+    background:#e7f8fb;
+    margin:1rem 5rem;
+    padding:2rem;
+}
+.displayQuestionHeading{
+    border-bottom: .1rem solid black;
+    margin-bottom: 1rem;
+    width: 100%;
+    justify-content:space-between;
+
+}
+.displayQuestionHeading img{
+    width: 1.5rem;
+    height: 1.5rem;
+}
+.displayQuestionHeading a{
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
 }
