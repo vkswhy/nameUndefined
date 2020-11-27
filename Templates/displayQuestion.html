@@ -1,39 +1,89 @@
-{% extends 'base.html' %}
-{% block bodyContent %}
-{% load static %}
+{% extends 'base.html' %} {% block bodyContent %} {% load static %}
 <div class="displayQuestion">
-  <div class="displayQuestionHeading d-flex"><h4>Question: {{quesNo}}/{{tNo}}</h4>
-  <span><img src='{% static 'graphics/alarm-clock.svg' %}' alt=""> <a id="timeRemain">__:__</a> </span>
+  <div class="displayQuestionHeading d-flex">
+    <h4>Question: {{quesNo}}/{{tNo}}</h4>
+    <span>
+      <img src='{% static 'graphics/alarm-clock.svg' %}' alt="">
+      <a id="timeRemain">__:__</a>
+    </span>
   </div>
   <form action="/displayQuestions/" method="POST">
     {% csrf_token %}
-    <input type="text" name="contestId" value={{contestId}} hidden>
-    <input type="text" name="quesId" value={{quesId}} hidden>
+    <input type="text" name="contestId" value="{{contestId}}" hidden />
+    <input type="text" name="quesId" value="{{quesId}}" hidden />
 
-    <div id ="ques">{{ques}}</div>
+    <div id="ques">{{ques}}</div>
 
     <div>
-        <label for='optionA' style=' padding: 5px; '>
-          <input type='radio' name='option' value='A' id='optionA' style='transform: scale(1.6); margin-right: 10px; vertical-align: middle; margin-top: -2px;' />
-          {{A}}</label>
+      <label for="optionA" style="padding: 5px">
+        <input
+          type="radio"
+          name="option"
+          value="A"
+          id="optionA"
+          style="
+            transform: scale(1.6);
+            margin-right: 10px;
+            vertical-align: middle;
+            margin-top: -2px;
+          "
+        />
+        {{A}}</label
+      >
     </div>
     <div>
-        <label for='optionB' style=' padding: 5px; '>
-          <input type='radio' name='option' value='B' id='optionB' style='transform: scale(1.6); margin-right: 10px; vertical-align: middle; margin-top: -2px;' />
-          {{B}}</label>
+      <label for="optionB" style="padding: 5px">
+        <input
+          type="radio"
+          name="option"
+          value="B"
+          id="optionB"
+          style="
+            transform: scale(1.6);
+            margin-right: 10px;
+            vertical-align: middle;
+            margin-top: -2px;
+          "
+        />
+        {{B}}</label
+      >
     </div>
     <div>
-        <label for='optionC' style=' padding: 5px; '>
-          <input type='radio' name='option' value='C' id='optionC' style='transform: scale(1.6); margin-right: 10px; vertical-align: middle; margin-top: -2px;' />
-          {{C}}</label>
+      <label for="optionC" style="padding: 5px">
+        <input
+          type="radio"
+          name="option"
+          value="C"
+          id="optionC"
+          style="
+            transform: scale(1.6);
+            margin-right: 10px;
+            vertical-align: middle;
+            margin-top: -2px;
+          "
+        />
+        {{C}}</label
+      >
     </div>
     <div>
-        <label for='optionD' style=' padding: 5px; '>
-          <input type='radio' name='option' value='D' id='optionD' style='transform: scale(1.6); margin-right: 10px; vertical-align: middle; margin-top: -2px;' />
-          {{D}}</label>
+      <label for="optionD" style="padding: 5px">
+        <input
+          type="radio"
+          name="option"
+          value="D"
+          id="optionD"
+          style="
+            transform: scale(1.6);
+            margin-right: 10px;
+            vertical-align: middle;
+            margin-top: -2px;
+          "
+        />
+        {{D}}</label
+      >
     </div>
 
-    <input id="submit" type="submit" value="Submit">
+    <input id="submit" type="submit" value="Submit" />
   </form>
 </div>
 <script>
@@ -49,10 +99,8 @@
     }
     time-=1;
 
- 
+
   }
-
-
 </script>
 
 {% endblock bodyContent %}
