@@ -87,6 +87,8 @@
   </form>
 </div>
 <script>
+  
+  let array=[2,3,4];
   var time={{time}}*10;
   setInterval(updateTime,1000);
   function updateTime(){
@@ -98,8 +100,7 @@
     document.getElementById('timeRemain').innerHTML=Math.floor(time/60) + ":" +time%60;
     }
     time-=1;
-
-
+  
   }
 </script>
 
