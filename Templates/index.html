@@ -1,11 +1,80 @@
-{% extends 'base.html' %}
-
-{% block bodyContent %}
-<div class="container d-inline-flex justify-content-around align-items-center">
-<a href="/createtest"><button class="btn btn-primary">Create Test</button></a>
-<a href="/updateProfile"><button class="btn btn-primary">Edit Profile</button></a>
-
-<a href="/taketest"><button class="btn btn-primary">Take Test</button></a>
-
+{% extends 'base.html' %} {% block bodyContent %} {% load static %}
+<div class="d-flex flex-wrap" id="homeText"></div>
+<div class="container d-inline-flex justify-content-around flex-wrap align-items-center">
+  <div class="homeCard">
+    <div class="cardImage">
+      <img src="{% static 'graphics/createTest.webp' %}" alt="" />
+    </div>
+    <div class="cardText">
+      <p>Create a new MCQ based test in easiest and most secured way possible.</p>
+      <a href="/createtest"
+        ><button class="btn btn-outline-success">Create Test</button></a
+      >
+    </div>
+  </div>
+  <div class="homeCard">
+    <div class="cardImage">
+      <img  src="{% static 'graphics/takeTest.jpg' %}" alt="" />
+    </div>
+    <div class="cardText">
+      <p>Take a currently running test here by providing us test ID.</p>
+      <a href="/taketest"><button class="btn btn-outline-success">Take Test</button></a>
+    </div>
+  </div>
 </div>
+<script type="text/javascript">
+  var division=document.getElementById('homeText'),i=0,text="$b$p$p$p$p$p$p$p$p$p$p$p$p$p$p$p$pI think$p$p$p$p it's look $rgood$b, what do you $Psay$b?",cursorCounter=0,isCursor=false,color="black";
+  const colors={"y":"yellow","b":"blue","r":"red","g":"green","P":"purple"}
+  division.innerHTML+="<pre></pre>";
+  console.log(division.innerHTML);
+  function removeCursor(){
+    let pos=document.getElementById('cursor');
+    if(pos)
+      division.removeChild(pos);
+    isCursor=false;
+  }
+  function addCursor(){
+    division.innerHTML+=`<pre id="cursor">|</pre>`;
+    isCursor=true;
+  }
+  function print(){
+    cursorCounter+=1;
+
+    if(isCursor==false && (cursorCounter%10==0 || cursorCounter%10==5)){
+      addCursor();
+    }
+    if(isCursor==true && (cursorCounter%10==3 || cursorCounter%10==8)){
+      removeCursor();
+    }
+    //rules
+    if(text[i]=='$'){
+      i+=1;
+      //pause
+      if(text[i]=='p'){
+
+      }
+      else{
+        color=colors[text[i]];
+      }
+
+
+      i+=1;
+      return 0;
+    }
+    
+    if(i<text.length){
+      removeCursor();
+
+      division.lastElementChild.innerHTML+=`<span id="item${i}" style="color:${color}">${text[i]}</span>`;
+      addCursor();
+            if(text[i]==" "){
+              division.innerHTML+="<pre></pre>"
+      }
+    }
+    i+=1;
+  }
+  setInterval(print,200);
+
+
+</script>
 {% endblock bodyContent %}

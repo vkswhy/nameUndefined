@@ -15,7 +15,7 @@ class Contests(models.Model):
 
 class Profile(models.Model):
     user=models.OneToOneField(User,null=True,on_delete=models.CASCADE)
-    Profile_pic=models.ImageField(upload_to='images')
+    Profile_pic=models.ImageField(upload_to='images',default='default-user-icon.jpg')
     Roll_no=models.IntegerField(blank=True,default=None)
     Branch=models.CharField(blank=True,max_length=30,default=None)
 

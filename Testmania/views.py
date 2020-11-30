@@ -185,10 +185,9 @@ def dashboardView(request):
     obj=request.user
     try:
         pf=obj.profile
-        print(obj.first_name)
         values.append([obj.username,obj.first_name,obj.last_name,obj.email,pf.Branch,pf.Profile_pic,pf.Roll_no]) 
     except:
-        values.append([obj.username,obj.email,'not provided','not provided','not provided'])
+        values.append([obj.username,obj.first_name,obj.last_name,obj.email,'not provided','default-user-icon.jpg','not provided'])
 
     form.update({"detail":values})  
 

@@ -1,14 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400&display=swap');
 body {
     /* background-image: url('../graphics/bodyBackground.jpg'); */
-    /* background: linear-gradient(to left, #334d50, #cbcaa5); W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(45deg, rgb(237, 211, 255), transparent)
 }
 
 .navbar {
-    background-color: rgba(0, 0, 4, .5)
+    background-color: rgba(0, 0, 4, .5);
+    padding: 1rem;
 }
 
 .header {
     box-shadow: 0 8px 17px 0 rgba(0, 0, 0, .2);
+    height: 4rem;
+    background-color: white;
 }
 
 .top-nav-collapse {
@@ -186,4 +190,49 @@ p:hover {
 .displayQuestionHeading a {
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
+}
+
+.homeCard {
+    font-family: 'Roboto Mono', monospace;
+    display: flex;
+    width: 15rem;
+    flex-direction: column;
+    padding: .5rem;
+    justify-content: center;
+    background-color: white;
+    margin-bottom: 2rem;
+    box-shadow: 0 0 .5rem 0 grey;
+    transition: box-shadow 0.2 linear;
+}
+
+.homeCard:hover {
+    box-shadow: none;
+}
+
+.homeCard:hover .cardImage img {
+    transform: scale(1.1);
+    opacity: .6;
+}
+
+.cardImage {
+    width: fit-content;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    margin-bottom: 1rem;
+}
+
+.cardImage img {
+    width: 95%;
+    height: 8rem;
+    transition: transform .25s cubic-bezier(0.11, 0.56, 0.95, 0.99);
+}
+
+#homeText {
+    width: 100%;
+    min-height: 20rem;
+    font-size: 3rem;
+    padding: 1rem 2rem;
+    font-weight: 100;
 }
