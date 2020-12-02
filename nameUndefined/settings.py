@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'Testmania.apps.TestmaniaConfig',
+    'crispy_forms',
 ]
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -73,7 +74,7 @@ WSGI_APPLICATION = 'nameUndefined.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
-
+CRISPY_TEMPLATE_PACK="bootstrap4"
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',

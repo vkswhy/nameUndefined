@@ -18,17 +18,17 @@
         <a href="javascript:history.back()"><img src="{% static 'graphics/backImage.svg' %}" alt="" style="width:1.5rem; height:1.5rem;"></a>
         <a class="navbar-brand" href="/#"><img class="logo" src="{% static 'graphics/logoTestMania.png' %}" alt=""></a>
         {% if user.is_authenticated %}
-        <div class="mr-4">
+        <div>
             <span>
                 <img src="/media/{{user.profile.Profile_pic}}" class="navImage" alt="">
                 <div class="dropdown d-inline">
                     <button class="dropdown-toggle btn shadow-none" type="button" data-toggle="dropdown">hello, {{username}} <span class="caret"></span>
                     </button>
-                    <ul class="dropdown-menu dropdown-menu-right mt-3 shadow-4">
-                        <li><a class="dropdown-item" href="/Dashboard">Dashboard</a></li>
+                    <ul class="dropdown-menu dropdown-menu-right mt-2 shadow-4">
+                        <li><a class="dropdown-item" href="/dashboard">Dashboard</a></li>
                         <li><a class="dropdown-item" href="/editProfile">Edit Profile</a></li>
-                        <li class="divider"></li>
-                        <li><a class="dropdown-item" href="/logout">Log Out</a></li>
+                        <li class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="/logout">Log Out <span class="ml-2"><img src="{% static 'graphics/logout.svg' %}" style="width:1rem; height:1rem"alt=""></span></a></li>
                     </ul>
                 
                 </div>

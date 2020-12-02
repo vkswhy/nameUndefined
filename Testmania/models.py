@@ -4,21 +4,21 @@ from django.contrib import admin
 def get_profile_path(instance,fileName):
     return "images/{username}/{fileName}".format(username=instance.user.username,fileName=fileName)
 class Contests(models.Model):
-    contest=models.CharField(blank=True,max_length=55,default=None)
+    contest=models.CharField(max_length=55)
     Author=models.ForeignKey(User, on_delete=models.CASCADE,blank=True)
-    noOfQues=models.IntegerField(blank=True,default=None)
+    noOfQues=models.IntegerField()
     startDate=models.DateField()
     startTime=models.TimeField()
     endDate=models.DateField()
     endTime=models.TimeField()
-    timePerQues=models.CharField(blank=True,max_length=12,default=None)
+    timePerQues=models.CharField(max_length=12)
     participants=models.ManyToManyField(User,related_name="contest_participants")
 
 class Profile(models.Model):
     user=models.OneToOneField(User,null=True,on_delete=models.CASCADE)
     Profile_pic=models.ImageField(upload_to=get_profile_path,default='images/default-user-icon.jpg')
-    Roll_no=models.IntegerField(blank=True,default=None)
-    Branch=models.CharField(blank=True,max_length=30,default=None)
+    Roll_no=models.IntegerField(blank=True,null=True,default=None)
+    Branch=models.CharField(blank=True,null=True,max_length=30,default=None)
 
 class Questions(models.Model):
     answerChoices=[

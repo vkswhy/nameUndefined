@@ -1,12 +1,17 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 {% block bodyContent %}
-<div class="container bg-light">
-<h1>Register</h1>
-<form action="" method="POST" class="form-group">
+<div>
+<h4 class="alert-heading">Register</h4>
+<form action="" method="POST">
+<div class="form-group">
     {% csrf_token %}
-    {{form.as_p}}
-    <input type="submit" class="btn-success" value="submit"></input>
+    {{form|crispy}}
+    <p class="mt-2"></p>
+    <input type="submit" class="btn btn-outline-success" value="submit"></input>
+</div>
 </form>
+<p>Already have account? <span><a href="/login">Sign In</a></span></p>
 </div>
 {% endblock bodyContent %}
 

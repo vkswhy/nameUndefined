@@ -3,7 +3,9 @@ body {
   /* background-image: url('../graphics/bodyBackground.jpg'); */
   background: linear-gradient(45deg, rgb(237, 211, 255), transparent);
 }
-
+label{
+  margin-top: 1rem;
+}
 .navbar {
   background-color: rgba(0, 0, 4, 0.5);
   padding: 1rem;
@@ -251,4 +253,9 @@ p:hover {
 #homeText pre {
   margin: 0;
   padding: 0;
+}
+@media screen and (max-width: 600px) {
+  #homeText {
+    min-height: 22rem;
+  }
 }

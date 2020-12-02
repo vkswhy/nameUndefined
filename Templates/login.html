@@ -1,11 +1,15 @@
 {% extends 'base.html' %}
 {% block bodyContent %}
+{% load crispy_forms_tags %}
 
-<h1>Login</h1><br>
+<h4>Login</h4>
 <form class="form-group" action="" method="POST">
     {% csrf_token %}
-    {{form.as_p}}
-    <input type="submit" class="btn-success">   
+    {{form|crispy}}
+    <p class="mt-2"></p>
+    <input type="submit" class="btn btn-outline-success">
+    <p>Don't have account? <span><a href="/register">Sign Up</a></span></p>
+ 
 </form>
 
 {% endblock bodyContent %}

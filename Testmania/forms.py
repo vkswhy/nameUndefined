@@ -31,7 +31,18 @@ class createTestModelForm(forms.ModelForm):
             'endDate':inputDate(),
             'startTime':inputTime(),
             'endTime':inputTime(),
-
+            }
+        labels={
+            'contest':'Test Name',
+            'noOfQues':'Number of questions',
+            'timePerQues':'Time per questions(in seconds)',
+            'startDate':'Start date of test',
+            'startTime':'Start time of test',
+            'endDate':'End date of test',
+            'endTime':'End time of test',
+            }
+        help_texts={
+            'timePerQues':'In seconds (e.g. 60 for 1 minute)',
         }
 
 class createQuestionModelForm(forms.ModelForm):
@@ -41,6 +52,7 @@ class createQuestionModelForm(forms.ModelForm):
         widgets={
             'question':forms.Textarea(attrs={"rows":"3"})
         }
+        
 class updateProfileForm(forms.ModelForm):
     class Meta:
         model=Profile
