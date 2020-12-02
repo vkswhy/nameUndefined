@@ -1,7 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.contrib import admin
-
+def get_profile_path(instance,fileName):
+    return "images/{username}/{fileName}".format(username=instance.user.username,fileName=fileName)
 class Contests(models.Model):
     contest=models.CharField(blank=True,max_length=55,default=None)
     Author=models.ForeignKey(User, on_delete=models.CASCADE,blank=True)
@@ -15,7 +16,7 @@ class Contests(models.Model):
 
 class Profile(models.Model):
     user=models.OneToOneField(User,null=True,on_delete=models.CASCADE)
-    Profile_pic=models.ImageField(upload_to='images',default='default-user-icon.jpg')
+    Profile_pic=models.ImageField(upload_to=get_profile_path,default='images/default-user-icon.jpg')
     Roll_no=models.IntegerField(blank=True,default=None)
     Branch=models.CharField(blank=True,max_length=30,default=None)
 

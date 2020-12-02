@@ -23,6 +23,8 @@ def registerView(request):
             user=form.save()
             user.set_password(user.password)
             user.save()
+            profile=Profile.objects.create(user=user)
+            profile.save
             login(request,user)
             return redirect('/',{'info':"Registration Successful"})
         else:

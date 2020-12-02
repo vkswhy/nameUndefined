@@ -1,250 +1,254 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400&display=swap");
 body {
-    /* background-image: url('../graphics/bodyBackground.jpg'); */
-    background: linear-gradient(45deg, rgb(237, 211, 255), transparent)
+  /* background-image: url('../graphics/bodyBackground.jpg'); */
+  background: linear-gradient(45deg, rgb(237, 211, 255), transparent);
 }
 
 .navbar {
-    background-color: rgba(0, 0, 4, .5);
-    padding: 1rem;
-    box-shadow: 0 0 1rem 0 rgb(98, 98, 98);
+  background-color: rgba(0, 0, 4, 0.5);
+  padding: 1rem;
+  box-shadow: 0 0 1rem 0 rgb(98, 98, 98);
+}
+.dropdown-menu{
+    transition: display 1s linear;
+}
+.dropdown:hover .dropdown-menu {
+  display: block;
 }
 
-.navbar a img {
-    width: 1.5rem;
-    height: 1.5rem;
+.navImage {
+  width: 2rem;
+  height: 2rem;
 }
 
 .header {
-    height: 3.6rem;
-    background-color: white;
+  height: 3.6rem;
+  background-color: white;
 }
 
 .logo {
-    width: 7rem !important;
-    height: 2.5rem !important;
+  width: 7rem !important;
+  height: 2.5rem !important;
 }
 
 table {
-    font-family: Arial, Helvetica, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
 }
 
 tbody {
-    border: none;
+  border: none;
 }
 
 th,
 td {
-    text-align: center;
-    padding: 8px 4px;
-    margin: 0;
+  text-align: center;
+  padding: 8px 4px;
+  margin: 0;
 }
 
 tr {
-    background-color: #e7f8fb;
-    border: none;
+  background-color: #e7f8fb;
+  border: none;
 }
 
 tr:nth-child(even) {
-    background-color: white;
+  background-color: white;
 }
 
 tr:hover {
-    /* background-color: #90e0ef; */
-    box-shadow: 0 0 .5rem 0 #04769cb9;
+  /* background-color: #90e0ef; */
+  box-shadow: 0 0 0.5rem 0 #04769cb9;
 }
 
 th {
-    background-color: #0095c7b9;
+  background-color: #0095c7b9;
 }
 
 #profilePic {
-    width: 6rem;
-    height: 6rem;
-    /* border-radius: 50%; */
+  width: 6rem;
+  height: 6rem;
+  /* border-radius: 50%; */
 }
 
 #profilePic:hover {
-    width: 6.01rem;
-    height: 6.01rem;
+  width: 6.01rem;
+  height: 6.01rem;
 }
 
 #userProfile {
-    flex: 1;
-    border-bottom: .1rem solid #054b62c9;
-    ;
-    width: 100%;
+  flex: 1;
+  border-bottom: 0.1rem solid #054b62c9;
+  width: 100%;
 }
 
 #userDetails {
-    flex: 1;
-    overflow: hidden;
-    overflow-x: scroll;
+  flex: 1;
+  overflow: hidden;
+  overflow-x: scroll;
 }
 
 #profileName {
-    display: flex;
-    /* justify-content:center; */
-    align-items: flex-end;
-    border-bottom: 2px solid #054b62c9;
-    margin-bottom: 0.3rem;
-    padding: px
+  display: flex;
+  /* justify-content:center; */
+  align-items: flex-end;
+  border-bottom: 2px solid #054b62c9;
+  margin-bottom: 0.3rem;
+  padding: px;
 }
 
 #profileName h5 {
-    /* margin-top:8px; */
-    margin-left: 1rem;
+  /* margin-top:8px; */
+  margin-left: 1rem;
 }
 
 .editProfile {
-    align-self: flex-end;
-    width: 2rem;
-    height: 2rem;
+  align-self: flex-end;
+  width: 2rem;
+  height: 2rem;
 }
 
 .editProfile:hover {
-    width: 2.1rem;
-    height: 2.1rem;
+  width: 2.1rem;
+  height: 2.1rem;
 }
 
 .userBox {
-    width: 100vw;
-    box-shadow: 0 0 1rem 0 #034d5a;
-    border-radius: 3%;
-    padding: 1.2rem;
+  width: 100vw;
+  box-shadow: 0 0 1rem 0 #034d5a;
+  border-radius: 3%;
+  padding: 1.2rem;
 }
 
 .userBox:hover {
-    animation: userBoxHoverAnimation 0.5s linear;
+  animation: userBoxHoverAnimation 0.5s linear;
 }
 
 #userProfile label {
-    font-weight: bold;
-    padding-right: 2rem;
+  font-weight: bold;
+  padding-right: 2rem;
 }
 
 p:hover {
-    transform: scaleZ(4px);
+  transform: scaleZ(4px);
 }
 
 .tableContainer {
-    margin-top: .6rem;
-    padding-bottom: .5rem;
-    border-bottom: .1rem solid #054b62c9;
+  margin-top: 0.6rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 0.1rem solid #054b62c9;
 }
 
 @keyframes userBoxHoverAnimation {
-    0% {
-        box-shadow: 0 0 1rem 0.2rem #034d5a;
-    }
-    50% {
-        box-shadow: none
-    }
-    100% {
-        box-shadow: 0 0 1rem 0rem #034d5a;
-    }
+  0% {
+    box-shadow: 0 0 1rem 0.2rem #034d5a;
+  }
+  50% {
+    box-shadow: none;
+  }
+  100% {
+    box-shadow: 0 0 1rem 0rem #034d5a;
+  }
 }
 
 .testTakenDetail {
-    background-color: #e7f8fb;
-    margin: 3rem 1rem;
-    /* box-shadow:0 0 1rem 0 #ff0000; */
-    padding: 2rem;
-    transition: linear .4s;
+  background-color: #e7f8fb;
+  margin: 3rem 1rem;
+  /* box-shadow:0 0 1rem 0 #ff0000; */
+  padding: 2rem;
+  transition: linear 0.4s;
 }
 
 .incorrect:hover {
-    box-shadow: 0 0 1rem 0 #ff0000 inset;
+  box-shadow: 0 0 1rem 0 #ff0000 inset;
 }
-
 
 /* .correct{
     box-shadow: 0 0 2rem 0.1rem rgb(8, 255, 8);
 } */
 
 .correct:hover {
-    box-shadow: 0 0 2rem 0.1rem rgb(0, 255, 0) inset;
+  box-shadow: 0 0 2rem 0.1rem rgb(0, 255, 0) inset;
 }
 
 #ques {
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: bold;
-    margin: .5rem 0.5rem 1rem;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  margin: 0.5rem 0.5rem 1rem;
 }
 
 .displayQuestion {
-    width: 100%;
-    background: #e7f8fb;
-    margin: 1rem 5rem;
-    padding: 2rem;
+  width: 100%;
+  background: #e7f8fb;
+  margin: 1rem 5rem;
+  padding: 2rem;
 }
 
 .displayQuestionHeading {
-    border-bottom: .1rem solid black;
-    margin-bottom: 1rem;
-    width: 100%;
-    justify-content: space-between;
+  border-bottom: 0.1rem solid black;
+  margin-bottom: 1rem;
+  width: 100%;
+  justify-content: space-between;
 }
 
 .displayQuestionHeading img {
-    width: 1.5rem;
-    height: 1.5rem;
+  width: 1.5rem;
+  height: 1.5rem;
 }
 
 .displayQuestionHeading a {
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
 }
 
 .homeCard {
-    font-family: 'Roboto Mono', monospace;
-    display: flex;
-    width: 15rem;
-    flex-direction: column;
-    padding: .5rem;
-    justify-content: center;
-    background-color: white;
-    margin-bottom: 2rem;
-    box-shadow: 0 0 .5rem 0 grey;
-    transition: box-shadow 0.2 linear;
+  font-family: "Roboto Mono", monospace;
+  display: flex;
+  width: 15rem;
+  flex-direction: column;
+  padding: 0.5rem;
+  justify-content: center;
+  background-color: white;
+  margin-bottom: 2rem;
+  box-shadow: 0 0 0.5rem 0 grey;
+  transition: box-shadow 0.2 linear;
 }
 
 .homeCard:hover {
-    box-shadow: none;
+  box-shadow: none;
 }
 
 .homeCard:hover .cardImage img {
-    transform: scale(1.1);
-    opacity: .6;
+  transform: scale(1.1);
+  opacity: 0.6;
 }
 
 .cardImage {
-    width: fit-content;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    overflow: hidden;
-    margin-bottom: 1rem;
+  width: fit-content;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  margin-bottom: 1rem;
 }
 
 .cardImage img {
-    width: 95%;
-    height: 8rem;
-    transition: transform .25s cubic-bezier(0.11, 0.56, 0.95, 0.99);
+  width: 95%;
+  height: 8rem;
+  transition: transform 0.25s cubic-bezier(0.11, 0.56, 0.95, 0.99);
 }
 
 #homeText {
-    width: 100%;
-    min-height: 20rem;
-    font-size: 3rem;
-    padding: 1rem 2rem;
-    font-weight: 100;
-    justify-content: center;
+  width: 100%;
+  min-height: 20rem;
+  font-size: 3rem;
+  padding: 1rem 2rem;
+  font-weight: 100;
+  justify-content: center;
 }
 
 #homeText pre {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
