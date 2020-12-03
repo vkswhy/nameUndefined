@@ -1,6 +1,11 @@
 {% extends 'base.html' %} {% block bodyContent %} {% load static %}
+<div class="heroSection">
+<img src="{% static 'graphics/heroImage.jpg' %}" alt="">
 <div class="d-flex flex-wrap justify-content-center align-content-center" id="homeText"></div>
-<div class="container d-inline-flex justify-content-between flex-wrap">
+
+</div>
+<div class="d-flex flex-wrap justify-content-center align-content-center" id="homeText"></div>
+<div class="d-inline-flex justify-content-between flex-wrap">
   <div class="homeCard">
     <div class="cardImage">
       <img src="{% static 'graphics/createTest.webp' %}" alt="" />
@@ -21,8 +26,8 @@
   </div>
 </div>
 <script type="text/javascript">
-  var division=document.getElementById('homeText'),i=0,text="$b$p$p$p$p$p$p$p$p$p$p$p$p$p$p$p$pI think$p$p$p$p it's look $rgood$b, what do you $Psay$b?",cursorCounter=0,isCursor=false,color="black";
-  const colors={"y":"yellow","b":"blue","r":"red","g":"green","P":"purple"}
+  var division=document.getElementById('homeText'),i=0,text="$w$p$p$p$p$pI think$p$p$p$p it's look $rgood$w, what do you $Psay$w?",cursorCounter=0,isCursor=false,color="black";
+  const colors={"y":"yellow","b":"blue","r":"red","g":"green","P":"purple","w":"white"}
   division.innerHTML+="<pre></pre>";
   console.log(division.innerHTML);
   function removeCursor(){
@@ -32,7 +37,7 @@
     isCursor=false;
   }
   function addCursor(){
-    division.lastElementChild.innerHTML+=`<span id="cursor">|</span>`;
+    division.lastElementChild.innerHTML+=`<span id="cursor" style="color:white">|</span>`;
     isCursor=true;
   }
   function print(){
@@ -71,7 +76,7 @@
     }
     i+=1;
   }
-  var timer=setInterval(print,200);
+  var timer=setInterval(print,150);
 
 
 </script>
