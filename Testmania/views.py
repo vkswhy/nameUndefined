@@ -6,6 +6,8 @@ from .forms import registerForm,loginForm,createTestModelForm,createQuestionMode
 from .models import Contests,Questions,Profile
 from random import randint
 from django.contrib.auth.models import User
+from django.contrib import messages
+from django.forms import ValidationError
 #To display Home Page
 def homePage(request):
     auth=False
@@ -26,6 +28,7 @@ def registerView(request):
             profile=Profile.objects.create(user=user)
             profile.save
             login(request,user)
+            messages.success(request,"welcome {username}".format(username=user.username))
             return redirect('/',{'info':"Registration Successful"})
         else:
             return render(request,'register.html',{'form':form})
@@ -41,6 +44,7 @@ def loginView(request):
     if request.method=="POST":
         form=loginForm(request.POST)
         if form.is_valid():
+            print("we were here",form.errors)
             username=form.cleaned_data['username']
             password=form.cleaned_data['password']
 
@@ -48,8 +52,11 @@ def loginView(request):
             password=password)
             if user is not None:
                 login(request,user)
+                messages.success(request,"welcome {username}".format(username=user.username))
+
                 return redirect("/")
             else:
+                form.add_error(None,"incorrect username or password")
                 return render(request,"login.html",{"form":form,"info":"incorrect username or password"})
         else:
             return render(request,"login.html",{"form":form,"info":"login failed due to form is not valid"})
@@ -77,6 +84,8 @@ def createTestView(request):
             form=createQuestionModelForm()
             return render(request,"createQuestion.html",{'form':form,'noOfQues':contest.noOfQues,"qNo":1,'contestId':contest.id,'a':True,'username':request.user.username})
         else:
+            messages.error(request,"failed with some internal error")
+
             return redirect("/")
     else:
         form=createTestModelForm()
@@ -93,12 +102,15 @@ def takeTestView(request):
         if query_set.count()>0:
             questDetail=displayUtil(request,query_set[0])
             if questDetail is None:
-                return HttpResponse("Submitted")
+                messages.success(request,"You have completed this test. see dashboard to check score")
+
+                return redirect('/')
             questDetail.update(getUser(request))
             query_set[0].participants.add(request.user)
             return render(request,"displayQuestion.html",questDetail)
         else:
-            return HttpResponse('ERRor')
+            messages.error(request,"Requested contest doesn't exist")
+            return redirect("/")
     return render(request,'takeTest.html',{'a':True,'username':request.user.username})
     
     
@@ -124,6 +136,8 @@ def createQuestionView(request):
         form=createQuestionModelForm()
 
         if qNo > contest.noOfQues:
+            messages.success(request,"Thanks for creating the contest. Please proceed to dashboard for other info")
+
             return redirect("/")
         return render(request,"createQuestion.html",{'form':form,'noOfQues':contest.noOfQues,"qNo":qNo,'contestId':contest.id,'a':True,'username':request.user.username})
     else:
@@ -134,7 +148,6 @@ def profileView(request):
     if request.method=='POST':
         try:
             form=updateProfileForm(request.POST,request.FILES,instance=request.user.profile)
-            # print('hello already user')
             form.save()
         except:
             form=updateProfileForm(request.POST,request.FILES)

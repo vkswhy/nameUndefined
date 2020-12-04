@@ -2,9 +2,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Nerko+One&family=Noto+Sans+JP:wght@300&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Monda:wght@700&display=swap');
 body {
-  /* background-image: url('../graphics/bodyBackground.jpg'); */
-  background: linear-gradient(45deg, rgb(237, 211, 255), transparent);
-}
+  background: #E0EAFC;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #CFDEF3, #E0EAFC);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #CFDEF3, #e9f0ff,#CFDEF3); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  }
 label{
   margin-top: 1rem;
 }
@@ -36,14 +37,16 @@ label{
 }
 .heroSection{
   width: 100vw;
-  height:25rem;
   max-height: fit-content;
   overflow:hidden;
   position: relative;
+  box-shadow: 0 .2rem 0.5rem 0 #02224e;
 
 }
 .heroSection img{
-  width:100%;
+  position: relative;
+  width: 100%;
+  height: 15rem;
 }
 table {
   font-family: Arial, Helvetica, sans-serif;
@@ -227,7 +230,7 @@ radio:checked{
 .homeCard {
   font-family: "Roboto Mono", monospace;
   display: flex;
-  width: 46%;
+  width: 30%;
   flex-direction: column;
   padding: 0.5rem;
   justify-content: center;
@@ -238,7 +241,7 @@ radio:checked{
 }
 
 .homeCard:hover {
-  box-shadow: 0 0 0.5rem 0 grey;
+  box-shadow: 0 0 0.5rem 0 #02224e;
 }
 
 .homeCard:hover .cardImage img {
@@ -261,7 +264,7 @@ radio:checked{
 
 #homeText {
   position: absolute;
-  top:5rem;
+  top:2rem;
   width: 40%;
   font-size: 2.5rem;
   padding: 1rem 2rem;
@@ -275,18 +278,36 @@ radio:checked{
 
 #homeText pre span {
   font-weight: bold;
+  color:green;
   font-family: 'Monda', sans-serif;
+  text-shadow: 0 0 2rem #000000;
 }
 @media screen and (max-width: 600px) {
   .heroSection{
-    height: fit-content;
+    height: 8rem;
+  }
+  .heroSection img{
   }
   #homeText {
     top:0rem;
     width: 80%;
-    font-size: 2rem;
+    font-size: 1.5rem;
   }
   .homeCard{
-    width: 100%;
+    width: 90%;
   }
+}
+.toast{
+  color:white;
+  border:none;
+  shadow:none;
+  font-family: "Roboto Mono", monospace;
+  font-weight:500;
+}
+.success{
+  background-color: rgba(8, 95, 8, 0.705);
+}
+.error{
+  padding: 0;
+  background-color:#ff3647d5;
 }
