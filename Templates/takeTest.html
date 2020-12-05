@@ -3,8 +3,42 @@
 
 <form class="form-group" action="" method="POST">
     {% csrf_token %}
-    <input type="text" name="id">
-    <input type="submit" class="btn-success">   
+    <input type="text" name="id" id="inp">
+    <input type="submit" class="xtn btn-success">   
 </form>
 
+<div class="tableContainer">
+            <h3 class="mt-5">Currently Ongoing Contests</h3>
+            <table class="table-bordered">
+            <tr>
+                <th>id</th>
+                <th>Test</th>
+                <th>Author</th>
+                <th>Start Date</th>
+                <th>Start Time</th>
+                <th>End Date</th>
+                <th>End Time</th>
+
+            </tr>
+            {% for i in onGoingContest %}
+            <tr>
+                <td id="id">{{i.id}}</td>
+                <td><a class="text-decoration-fa-underline" onclick="estLinkclicked({{i.id}})" style="color:darkblue; cursor:pointer">{{i.contest}}</a></td>
+                <td>{{i.author}}</td>
+                <td>{{i.startDate}}</td>
+                <td>{{i.startTime}}</td>
+                <td>{{i.endDate}}</td>
+                <td>{{i.endTime}}</td>
+
+            </tr>
+            {% endfor %}
+            </table>
+        </div>
+        <script type="text/javascript">
+            function estLinkclicked(id){
+                $("#inp").val(parseInt(id));
+                $(".xtn").click();
+
+            }
+        </script>
 {% endblock bodyContent %}

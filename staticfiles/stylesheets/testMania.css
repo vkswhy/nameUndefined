@@ -51,6 +51,7 @@ label{
 table {
   font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
+  border: 1px solid black;
   width: 100%;
 }
 
@@ -58,8 +59,7 @@ tbody {
   border: none;
 }
 
-th,
-td {
+td,th{
   text-align: center;
   padding: 8px 4px;
   margin: 0;
@@ -67,20 +67,20 @@ td {
 
 tr {
   background-color: #e7f8fb;
-  border: none;
+  margin: 0;
+  border: none !important;
 }
 
-tr:nth-child(even) {
-  background-color: white;
+tr:nth-child(even){
+  background-color:white;
 }
 
 tr:hover {
-  /* background-color: #90e0ef; */
-  box-shadow: 0 0 0.5rem 0 #04769cb9;
+  box-shadow: 0 0 0.5rem 0 #0a5169;
 }
 
 th {
-  background-color: #0095c7b9;
+  background-color: #22c8ff;
 }
 
 #profilePic {
@@ -268,12 +268,12 @@ radio:checked{
   width: 40%;
   font-size: 2.5rem;
   padding: 1rem 2rem;
-  font-weight: 100;
 }
 
 #homeText pre {
   margin: 0;
   padding: 0;
+  overflow: hidden;
 }
 
 #homeText pre span {

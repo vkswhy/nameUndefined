@@ -8,6 +8,7 @@ from random import randint
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.forms import ValidationError
+from datetime import datetime
 #To display Home Page
 def homePage(request):
     auth=False
@@ -44,7 +45,6 @@ def loginView(request):
     if request.method=="POST":
         form=loginForm(request.POST)
         if form.is_valid():
-            print("we were here",form.errors)
             username=form.cleaned_data['username']
             password=form.cleaned_data['password']
 
@@ -111,7 +111,9 @@ def takeTestView(request):
         else:
             messages.error(request,"Requested contest doesn't exist")
             return redirect("/")
-    return render(request,'takeTest.html',{'a':True,'username':request.user.username})
+    else:
+        form={"onGoingContest":ongoingContestsUtil(request)}
+        return render(request,'takeTest.html',form)
     
     
 #for create Question Page
@@ -180,7 +182,8 @@ def displayQuesView(request):
         questDetail=displayUtil(request,contest)
         
         if questDetail is None:
-            return HttpResponse("Thank You")
+            messages.success(request,"Thanks for participating, please proceed to test taken section to check results")
+            return redirect("/dashboard")
         questDetail.update(getUser(request))
         return render(request,"displayQuestion.html",questDetail)
 
@@ -373,3 +376,21 @@ def contest_records(request,contest_id):
 
     return render(request,'contest_records.html',{'participants':values,"a":True,"username":request.user.username})
 
+def ongoingContestsUtil(request):
+    currTime=datetime.now().time()
+    currDate=datetime.now().date()
+    querySet=Contests.objects.filter(startDate__lte=currDate,endDate__gte=currDate).exclude(startDate=currDate,startTime__gt=currTime).exclude(endDate=currDate,endTime__lt=currTime)
+    contestArray=[]
+    for i in querySet:
+        td={
+            "id":i.id,
+            "contest":i.contest,
+            "author":i.Author,
+            "startDate":i.startDate,
+            "startTime":i.startTime,
+            "endDate":i.endDate,
+            "endTime":i.endTime,
+            }
+        contestArray.append(td)
+
+    return contestArray
