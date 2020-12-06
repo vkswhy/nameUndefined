@@ -1,7 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400&display=swap");
 @import url('https://fonts.googleapis.com/css2?family=Nerko+One&family=Noto+Sans+JP:wght@300&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Monda:wght@700&display=swap');
+
 body {
+  width: 100vw !important;
+  padding: 0;
+  margin: 0;
+  overflow-x:hidden; 
   background: #E0EAFC;  /* fallback for old browsers */
   background: -webkit-linear-gradient(to right, #CFDEF3, #E0EAFC);  /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to right, #CFDEF3, #e9f0ff,#CFDEF3); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
@@ -15,6 +20,7 @@ label{
   box-shadow: 0 0 1rem 0 rgb(98, 98, 98);
 }
 .dropdown-menu{
+    top: 2px;
     transition: display 1s linear;
 }
 .dropdown:hover .dropdown-menu {
@@ -24,11 +30,11 @@ label{
 .navImage {
   width: 2rem;
   height: 2rem;
+  border-radius: 50%;
 }
 
 .header {
-  height: 4rem;
-  background-color: white;
+  height: 4.6rem;
 }
 
 .logo {
@@ -60,7 +66,7 @@ tbody {
 }
 
 td,th{
-  text-align: center;
+  text-align: center !important;
   padding: 8px 4px;
   margin: 0;
 }
@@ -237,11 +243,12 @@ radio:checked{
   background-color: white;
   border-radius: .3rem;
   margin: 2rem 1rem;
+  box-shadow: 0 0 0.5rem 0 #02224e;
+
   transition: box-shadow 0.3 linear;
 }
 
 .homeCard:hover {
-  box-shadow: 0 0 0.5rem 0 #02224e;
 }
 
 .homeCard:hover .cardImage img {
@@ -305,9 +312,10 @@ radio:checked{
   font-weight:500;
 }
 .success{
-  background-color: rgba(8, 95, 8, 0.705);
+  background-color:#00b448f5;
 }
 .error{
   padding: 0;
-  background-color:#ff3647d5;
+  background-color:#ff0d36ef;
 }
+

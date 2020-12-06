@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.contrib import admin
 def get_profile_path(instance,fileName):
-    return "images/{username}/{fileName}".format(username=instance.user.username,fileName=fileName)
+    return "images/{username}/{fileName}".format(username=instance.user.id,fileName=fileName)
 class Contests(models.Model):
     contest=models.CharField(max_length=55)
     Author=models.ForeignKey(User, on_delete=models.CASCADE,blank=True)

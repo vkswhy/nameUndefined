@@ -2,13 +2,14 @@
 {% block bodyContent %}
 {% load crispy_forms_tags %}
 
-<h4>Login</h4>
-<form class="form-group" action="" method="POST">
+<form class="form-group p-2" action="" method="POST">
+    <h4 class="btn btn-secondary btn-block font-weight-bold">Login</h4>
+
     {% csrf_token %}
     {{form|crispy|escape}}
     <p class="mt-2"></p>
-    <input type="submit" class="btn btn-outline-success">
-    <p>Don't have account? <span><a href="/register">Sign Up</a></span></p>
+    <input type="submit" class="btn btn-outline-secondary waves-effect">
+    <p>Don't have account? <span><a class="text-secondary" href="/register">Sign Up</a></span></p>
  
 </form>
 

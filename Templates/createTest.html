@@ -2,10 +2,10 @@
 {% block bodyContent %}
 {% load crispy_forms_tags %}
 
-<form class="form-group" action="" method="POST">
-    {% csrf_token %}
+<form class="form-group p-4" action="" method="POST">
+<h4 class="btn btn-info btn-block">Create Test</h4>    {% csrf_token %}
     {{form|crispy}}
-    <input type="submit" class="btn-outline-success mt-2">   
+    <input type="submit" class="btn btn-outline-info m-4">   
 </form>
 
 {% endblock bodyContent %}
