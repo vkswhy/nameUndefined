@@ -28,12 +28,11 @@
 <body style="min-height:100vh; padding:0; max-width:100vw;">
     <div class="header">
         <nav class="navbar navbar-expand-sm navbar-light fixed-top d-flex justify-content-between" style="width:100vw; background-color:white;">
-        <a href="javascript:history.back()"><img src="{% static 'graphics/backImage.svg' %}" alt="" style="width:1.5rem; height:1.5rem;"></a>
+        <a id="back" href="javascript:history.back()"><img src="{% static 'graphics/backImage.svg' %}" alt="" style="width:1.5rem; height:1.5rem;"></a>
         <a class="navbar-brand" href="/#"><img class="logo" src="{% static 'graphics/logoTestMania.png' %}" alt=""></a>
         {% if user.is_authenticated %}
         <div>
             <span>
-                <img src="/media/{{user.profile.Profile_pic}}" class="navImage" alt="">
                 <div class="dropdown d-inline">
                     <button class="dropdown-toggle btn shadow-none pr-0 pl-0 text-lowercase text-capitalize" type="button" data-toggle="dropdown">hello, &nbsp {{username}} <span class="caret"></span>
                     </button>

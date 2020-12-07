@@ -26,10 +26,10 @@
   </div>
 </div>
 <script type="text/javascript">
+  $("#back").remove();
   var division=document.getElementById('homeText'),i=0,text="$w$p$p$p$p$pI think$p$p$p$p it's look $rgood$w, what do you $Psay$w?",cursorCounter=0,isCursor=false,color="black";
   const colors={"y":"yellow","b":"blue","r":"red","g":"light-green","P":"purple","w":"white"}
   division.innerHTML+="<pre></pre>";
-  console.log(division.innerHTML);
   function removeCursor(){
     let pos=document.getElementById('cursor');
     if(pos)

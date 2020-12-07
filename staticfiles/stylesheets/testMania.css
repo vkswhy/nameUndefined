@@ -19,6 +19,9 @@ label{
   padding: 1rem;
   box-shadow: 0 0 1rem 0 rgb(98, 98, 98);
 }
+.custom-file{
+  background-color:inherit !important;
+}
 .dropdown-menu{
     top: 2px;
     transition: display 1s linear;
@@ -38,8 +41,7 @@ label{
 }
 
 .logo {
-  width: 7rem !important;
-  height: 2.5rem !important;
+  width: 12rem;
 }
 .heroSection{
   width: 100vw;
@@ -69,6 +71,7 @@ td,th{
   text-align: center !important;
   padding: 8px 4px;
   margin: 0;
+  min-width: 5rem;
 }
 
 tr {
@@ -108,8 +111,6 @@ th {
 
 #userDetails {
   flex: 1;
-  overflow: hidden;
-  overflow-x: scroll;
 }
 
 #profileName {
@@ -162,6 +163,9 @@ p:hover {
 }
 
 .tableContainer {
+  overflow: hidden;
+  max-width: 100%;
+  overflow-x: scroll;
   margin-top: 0.6rem;
   padding-bottom: 0.5rem;
   border-bottom: 0.1rem solid #054b62c9;
@@ -303,6 +307,12 @@ radio:checked{
   .homeCard{
     width: 90%;
   }
+  .logo{
+    width:8rem;
+  }
+  .userBox{
+    width: 100%;
+  }
 }
 .toast{
   color:white;
@@ -310,6 +320,7 @@ radio:checked{
   shadow:none;
   font-family: "Roboto Mono", monospace;
   font-weight:500;
+  max-width: 70vw;
 }
 .success{
   background-color:#00b448f5;
@@ -318,4 +329,3 @@ radio:checked{
   padding: 0;
   background-color:#ff0d36ef;
 }
-
